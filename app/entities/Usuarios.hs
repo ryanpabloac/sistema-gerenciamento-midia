@@ -1,4 +1,4 @@
-module Usuarios where
+module Entities.Usuarios where
 import Tipos
 
 addUsuario :: Usuario -> [Usuario] -> [Usuario]

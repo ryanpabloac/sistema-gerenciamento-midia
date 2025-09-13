@@ -1,5 +1,7 @@
-module Midias where
+module Entities.Midias where
 import Tipos
+import Data.List
+import Data.Char (toLower)
 
 addItem :: Midia -> [Midia] -> [Midia]
 addItem novaMidia lista = novaMidia : lista
@@ -8,45 +10,52 @@ addItem novaMidia lista = novaMidia : lista
 buscarItemTalvez :: Codigo -> [Midia] -> Maybe Midia
 buscarItemTalvez cod_busca lista =
   -- a função find retorna o primeiro elemento que satisfaz a condição, embrulhado em um Just. Se nenhum satisfaz, retorna Nothing;
-  find (\item -> cod item == id_busca) lista
+  find (\item -> cod item == cod_busca) lista
 
 removerItem :: Codigo -> [Midia] -> [Midia]
 removerItem cod_remover lista =
   -- mantém apenas os itens que o id é diferente de id_remover;
-  filter (\item -> cod item /= id_remover) lista
+  filter (\item -> cod item /= cod_remover) lista
   
-cadastrarMidia :: IO Midia
-cadastrarMidia = do
-  putStrLn "Qual o tipo de mídia? (1-Livro, 2-Filme, 3-Jogo)"
-  putStr "Escolha: "
+lerTipoMidia :: IO AutorMidia
+lerTipoMidia = do
+  putStrLn "Qual o tipo de mídia? (Livro, Filme, Jogo)"
+  putStr "Tipo: "
   tipoStr <- getLine
 
-  criacaoMidia <- case tipoStr of
-    "1" -> do
-      putStr "Digite o nome do autor: "
+  case map toLower tipoStr of -- toLower para bater o tipo
+    "livro" -> do
+      putStr "Autor: "
       nome <- getLine
       return (AutorLivro nome)
-    "2" -> do
-      putStr "Digite o nome do diretor: "
+    "filme" -> do
+      putStr "Diretor: "
       nome <- getLine
       return (AutorFilme nome)
-    "3" -> do
-      putStr "Digite o nome do criador/estúdio: "
+    "jogo" -> do
+      putStr "Criador/Estúdio: "
       nome <- getLine
       return (AutorJogo nome)
     _ -> do
       putStrLn "Opção inválida. Tente novamente."
-      cadastrarMidia
+      lerTipoMidia
 
+-- função principal;
+cadastrarMidia :: IO Midia
+cadastrarMidia = do
+  -- usa a função auxiliar para pegar os detalhes do tipo e do criador;
+  criacaoMidia <- lerTipoMidia
+
+  -- outros dados
   putStr "Digite o título: "
   tituloMidia <- getLine
   putStr "Digite o ano: "
   anoMidiaStr <- getLine
-  putStr "Digite o ID: "
-  codMidiaStr <- getLine
+  putStr "Digite o CÓDIGO: "
+  codigoMidiaStr <- getLine
 
   return Midia
-    { cod = read codMidiaStr -- read converte codMidiaStr para o tipo especificado;
+    { cod = read codigoMidiaStr
     , titulo = tituloMidia
     , ano = read anoMidiaStr
     , criacao = criacaoMidia
