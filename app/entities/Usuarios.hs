@@ -1,5 +1,7 @@
 module Entities.Usuarios where
 import Tipos
+import Data.List
+import Data.Char
 
 addUsuario :: Usuario -> [Usuario] -> [Usuario]
 addUsuario novoUsuario lista = novoUsuario : lista
@@ -65,7 +67,7 @@ edicaoUsuario usuarioOriginal = do
       return usuarioOriginal { email = novoEmail }
     _ -> do
       putStrLn "Opção inválida. Tente novamente."
-      loopEdicaoUsuario usuarioOriginal
+      edicaoUsuario usuarioOriginal
 
 -- Função principal que orquestra todo o processo de edição
 editarUsuario_IO :: [Usuario] -> IO [Usuario]

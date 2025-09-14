@@ -7,8 +7,8 @@ addItem :: Midia -> [Midia] -> [Midia]
 addItem novaMidia lista = novaMidia : lista
   
 -- Retorna Nothing se nao achar
-buscarItemTalvez :: Codigo -> [Midia] -> Maybe Midia
-buscarItemTalvez cod_busca lista =
+buscarItem :: Codigo -> [Midia] -> Maybe Midia
+buscarItem cod_busca lista =
   -- a função find retorna o primeiro elemento que satisfaz a condição, embrulhado em um Just. Se nenhum satisfaz, retorna Nothing;
   find (\item -> cod item == cod_busca) lista
 
@@ -103,7 +103,7 @@ edicaoMidia midiaOriginal = do
       return midiaOriginal { ano = read novoAnoStr } -- 'read' converte String para Int
     _ -> do
       putStrLn "Opção inválida. Tente novamente."
-      loopEdicaoMidia midiaOriginal
+      edicaoMidia midiaOriginal
 
 -- Função principal que orquestra todo o processo de edição
 editarMidia_IO :: [Midia] -> IO [Midia]
@@ -115,7 +115,7 @@ editarMidia_IO listaDeMidias = do
   codStr <- getLine
   let codigo = read codStr
 
-  case buscarItemPorCodigo codigo listaDeMidias of
+  case buscarItem codigo listaDeMidias of
     Nothing -> do
       putStrLn "ERRO: Item não encontrado."
       return listaDeMidias
