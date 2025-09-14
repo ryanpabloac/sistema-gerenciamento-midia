@@ -7,6 +7,30 @@ import Data.Char
 addUsuario :: Usuario -> [Usuario] -> [Usuario]
 addUsuario novoUsuario lista = novoUsuario : lista
 
+-- verifica se a matrícula já existe;
+validaMatriculaUnica :: Matricula -> [Usuario] -> Either String ()
+validaMatriculaUnica mat lista =
+  if any (\u -> matricula u == mat) lista
+  then Left $ "Erro: matrícula \"" ++ mat ++ "\" já cadastrada."
+  else Right ()
+
+-- verifica se o e-mail tem um formato correto ('@' e '.' depois do '@').
+validaEmail :: Email -> Either String ()
+validaEmail email =
+  case elemIndex '@' email of
+    Nothing -> Left $ "Erro: e-mail \"" ++ email ++ "\" está mal formatado (falta @)."
+    Just indexArroba ->
+      if isInfixOf "." (drop (indexArroba + 1) email)
+      then Right ()
+      else Left $ "Erro: e-mail \"" ++ email ++ "\" está mal formatado (falta '.' após o domínio)."
+
+-- Função mestre que combina todas as validações de usuário.
+-- O '>>' encadeia as validações, parando na primeira que der erro.
+validaNovoUsuario :: Matricula -> Email -> [Usuario] -> Either String ()
+validaNovoUsuario mat email lista =
+  validaMatriculaUnica mat lista >>
+  validaEmail email
+
 buscarUsuarioPorMatricula :: Matricula -> [Usuario] -> Maybe Usuario
 buscarUsuarioPorMatricula mat_busca lista =
   -- A lógica é a mesma do buscaItem
@@ -46,7 +70,7 @@ removerUsuario_IO listaDeUsuarios = do
           putStrLn "Remoção cancelada."
           return listaDeUsuarios
 
-cadastrarUsuario :: IO Usuario
+cadastrarUsuario :: [Usuario] -> IO Usuario
 cadastrarUsuario = do
   logMessage "INFO" "Sessão de cadastro de novo usuário iniciada."
   putStrLn "--- Cadastro de Novo Usuário ---"
@@ -60,15 +84,21 @@ cadastrarUsuario = do
   putStr "Digite o email: "
   emailUsuario <- getLine
 
-  logMessage "INFO" ("Novo usuário '" ++ nomeUsuario ++ "' criado em memória, aguardando adição à lista principal.")
+  --logMessage "INFO" ("Novo usuário '" ++ nomeUsuario ++ "' criado em memória, aguardando adição à lista principal.")
   
-  -- 'return' embrulha o 'Usuario' criado em uma ação IO.
-  -- OBS: nao tem read pq tudo é string;
-  return Usuario
-    { nome = nomeUsuario
-    , matricula = matriculaUsuario
-    , email = emailUsuario
-    }
+   -- <<< ETAPA DE VALIDAÇÃO >>>
+  case validaNovoUsuario matriculaUsuario emailUsuario listaDeUsuarios of
+    Left erro -> do
+      -- se a validação falhou, mostra o erro e tenta o cadastro novamente;
+      putStrLn erro
+      cadastrarUsuario listaDeUsuarios
+    Right () -> do
+      -- se a validação passou, cria e retorna o usuário;
+      logMessage "INFO" ("Novo usuário '" ++ nomeUsuario ++ "' criado com sucesso.")
+      let novoUsuario = Usuario { nome = nomeUsuario, matricula = matriculaUsuario, email = emailUsuario }
+      return novoUsuario
+      -- 'return' embrulha o 'Usuario' criado em uma ação IO.
+      -- OBS: nao tem read pq tudo é string;
     
 -- função auxiliar para mostrar os dados de um usuário;
 mostrarUsuario :: Usuario -> IO ()

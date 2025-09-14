@@ -6,6 +6,39 @@ import Data.Char
 
 addItem :: Midia -> [Midia] -> [Midia]
 addItem novaMidia lista = novaMidia : lista
+
+-- verifica se o código já existe;
+validaCodigoUnico :: Codigo -> [Midia] -> Either String ()
+validaCodigoUnico codItem lista =
+  if any (\m -> cod m == codItem) lista
+  then Left $ "Erro: código \"" ++ show codItem ++ "\" já cadastrado."
+  else Right ()
+
+-- valida o ano com base no tipo de mídia;
+validaAno :: Ano -> AutorMidia -> IO (Either String ())
+validaAno anoMidia criacaoMidia = do
+  -- pega a data atual para saber o ano corrente;
+  (anoAtual, _, _) <- toGregorian . utctDay <$> getCurrentTime
+
+  let (limiteInferior, tipoStr) = case criacaoMidia of
+                                    AutorFilme _ -> (1900, "filmes")
+                                    AutorJogo _  -> (1947, "jogos")
+                                    AutorLivro _ -> (0, "livros") -- tem livro desde sempre, sei lá;
+
+  if anoMidia >= limiteInferior && anoMidia <= fromIntegral anoAtual
+  then return $ Right ()
+  else return $ Left $ "Erro: ano \"" ++ show anoMidia ++ "\" inválido para " ++ tipoStr ++
+                       ". (Aceito: " ++ show limiteInferior ++ " - " ++ show anoAtual ++ ")"
+
+-- função que combina as validações de mídia;
+validaNovaMidia :: Codigo -> Ano -> AutorMidia -> [Midia] -> IO (Either String ())
+validaNovaMidia codItem anoMidia criacaoMidia lista = do
+  -- primeiro, a validação pura;
+  case validaCodigoUnico codItem lista of
+    Left erro -> return $ Left erro
+    Right () -> do
+      -- se passou, executa a validação IO;
+      validaAno anoMidia criacaoMidia
   
 -- Retorna Nothing se nao achar
 buscarItem :: Codigo -> [Midia] -> Maybe Midia
@@ -77,7 +110,7 @@ lerTipoMidia = do
       lerTipoMidia
 
 -- função principal;
-cadastrarMidia :: IO Midia
+cadastrarMidia :: [Midia] -> IO Midia
 cadastrarMidia = do
   logMessage "INFO" "Sessão de cadastro de nova mídia iniciada." -- log
   -- usa a função auxiliar para pegar os detalhes do tipo e do criador;
@@ -91,14 +124,23 @@ cadastrarMidia = do
   putStr "Digite o CÓDIGO: "
   codigoMidiaStr <- getLine
 
-  logMessage "INFO" ("Nova mídia ('" ++ tituloMidia ++ "') criada em memória, aguardando adição à lista principal.") -- log
+  --logMessage "INFO" ("Nova mídia ('" ++ tituloMidia ++ "') criada em memória, aguardando adição à lista principal.") -- log
   
-  return Midia
-    { cod = read codigoMidiaStr
-    , titulo = tituloMidia
-    , ano = read anoMidiaStr
-    , criacao = criacaoMidia
-    }
+  resultadoValidacao <- validaNovaMidia codigoMidia anoMidia criacaoMidia listaDeMidias
+  
+  case resultadoValidacao of
+    Left erro -> do
+      putStrLn erro
+      cadastrarMidia listaDeMidias -- tenta novamente;
+    Right () -> do
+      logMessage "INFO" ("Nova mídia ('" ++ tituloMidia ++ "') validada com sucesso.")
+      let novaMidia = Midia
+            { cod = codigoMidia
+            , titulo = tituloMidia
+            , ano = anoMidia
+            , criacao = criacaoMidia
+            }
+      return novaMidia
     
 -- função auxiliar para mostrar os dados de uma mídia;
 mostrarMidia :: Midia -> IO ()
