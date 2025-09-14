@@ -5,10 +5,42 @@ import Tipos
 import Entities.Usuarios
 import Entities.Midias
 import Log.Log
-import System.IO (hSetBuffering, stdout, BufferMode(LineBuffering))
--- Importa as funções de carregamento pelo nome completo do módulo
+import System.IO
 import Servicos.Arquivos
+import Entities.SubmenuAdicionarMidia
 
+mainLoop :: [Midia] -> [Usuario] -> IO ()
+mainLoop midias usuarios = do
+  putStrLn "\n--- MENU PRINCIPAL ---"
+  putStrLn "1 - Gerenciar Mídias"
+  putStrLn "2 - Gerenciar Usuários"
+  putStrLn "3 - Sair"
+  putStr "Escolha uma opção: "
+  opcao <- getLine
+
+  case opcao of
+    "1" -> do
+      -- Chama o loop do submenu e passa a lista de mídias atual
+      novasMidias <- loopSubmenuMidias midias
+      mainLoop novasMidias usuarios
+    "2" -> do
+      putStrLn "Submenu de usuários ainda não implementado."
+      mainLoop midias usuarios
+    "3" -> putStrLn "Saindo..."
+    _   -> do
+      putStrLn "Opção inválida."
+      mainLoop midias usuarios
+
+main :: IO ()
+main = do
+  hSetBuffering stdout NoBuffering
+  
+  listaDeMidias <- carregarMidias "Arquivos/Midia.csv"
+  listaDeUsuarios <- carregarUsuarios "Arquivos/Users.csv"
+  
+  mainLoop listaDeMidias listaDeUsuarios
+
+{-
 main :: IO ()
 main = do
   putStrLn "--- INICIANDO TESTE DE CARREGAMENTO DE ARQUIVOS CSV ---"
@@ -36,3 +68,5 @@ main = do
     else mapM_ print listaDeUsuarios
 
   putStrLn "\n--- TESTE CONCLUÍDO ---"
+  
+-}

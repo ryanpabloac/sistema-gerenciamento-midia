@@ -1,4 +1,4 @@
-module SubmenuEditar where
+module Entities.SubmenuEditar where
 import Tipos
 
 edicaoMenu :: IO ()

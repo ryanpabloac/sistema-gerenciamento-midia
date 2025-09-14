@@ -1,4 +1,4 @@
-module SubmenuAdicionarUsuario where
+module Entities.SubmenuAdicionarUsuario where
 import Tipos
 
 adicionarUsuarioMenu :: IO ()
