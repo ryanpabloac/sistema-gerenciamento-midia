@@ -1,6 +1,7 @@
 module Tipos where
 import Data.Time.Calendar (Day, fromGregorian)
 import Data.List
+import Data.Char
 
 -- SINÔNIMOS DE TIPO
 -- usuarios
