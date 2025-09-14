@@ -18,6 +18,37 @@ removerItem cod_remover lista =
   -- mantém apenas os itens que o id é diferente de id_remover;
   filter (\item -> cod item /= cod_remover) lista
   
+removerItem_IO :: [Midia] -> IO [Midia]
+removerItem_IO listaDeMidias = do
+  logMessage "INFO" "Sessão de remoção de mídia iniciada."
+  putStrLn "-----------"
+  putStrLn "Remover item"
+  putStrLn "-----------"
+  putStr "Informe o código do item a ser removido: "
+  codStr <- getLine
+  let codigo = read codStr
+
+  -- verifica se o item existe antes de tentar remover;
+  case buscarItem codigo listaDeMidias of
+    Nothing -> do
+      logMessage "WARN" ("Tentativa de remover item com código inexistente: " ++ show codigo) -- log
+      putStrLn "ERRO: Item não encontrado."
+      return listaDeMidias -- retorna a lista inalterada;
+    Just itemParaRemover -> do
+      putStrLn $ "Você está prestes a remover: \"" ++ titulo itemParaRemover ++ "\"."
+      putStr "Confirma remoção? (S/N): "
+      confirmacao <- getLine
+      case map toLower confirmacao of
+        "s" -> do
+          let novaLista = removerItem codigo listaDeMidias
+          logMessage "INFO" ("Mídia com código '" ++ show codigo ++ "' foi REMOVIDA.") -- log
+          putStrLn "Sucesso! Item removido."
+          return novaLista
+        _ -> do
+          logMessage "INFO" ("Remoção da mídia com código '" ++ show codigo ++ "' foi cancelada.") -- log
+          putStrLn "Remoção cancelada."
+          return listaDeMidias
+  
 lerTipoMidia :: IO AutorMidia
 lerTipoMidia = do
   putStrLn "Qual o tipo de mídia? (Livro, Filme, Jogo)"
@@ -26,24 +57,29 @@ lerTipoMidia = do
 
   case map toLower tipoStr of -- toLower para bater o tipo
     "livro" -> do
+      logMessage "DEBUG" "Usuário selecionou o tipo 'Livro'."
       putStr "Autor: "
       nome <- getLine
       return (AutorLivro nome)
     "filme" -> do
+      logMessage "DEBUG" "Usuário selecionou o tipo 'Filme'."
       putStr "Diretor: "
       nome <- getLine
       return (AutorFilme nome)
     "jogo" -> do
+      logMessage "DEBUG" "Usuário selecionou o tipo 'Jogo'."
       putStr "Criador/Estúdio: "
       nome <- getLine
       return (AutorJogo nome)
     _ -> do
+      logMessage "WARN" ("Usuário inseriu um tipo de mídia inválido: '" ++ tipoStr ++ "'.") -- log
       putStrLn "Opção inválida. Tente novamente."
       lerTipoMidia
 
 -- função principal;
 cadastrarMidia :: IO Midia
 cadastrarMidia = do
+  logMessage "INFO" "Sessão de cadastro de nova mídia iniciada." -- log
   -- usa a função auxiliar para pegar os detalhes do tipo e do criador;
   criacaoMidia <- lerTipoMidia
 
@@ -55,6 +91,8 @@ cadastrarMidia = do
   putStr "Digite o CÓDIGO: "
   codigoMidiaStr <- getLine
 
+  logMessage "INFO" ("Nova mídia ('" ++ tituloMidia ++ "') criada em memória, aguardando adição à lista principal.") -- log
+  
   return Midia
     { cod = read codigoMidiaStr
     , titulo = tituloMidia
@@ -106,9 +144,10 @@ edicaoMidia midiaOriginal = do
       putStrLn "Opção inválida. Tente novamente."
       edicaoMidia midiaOriginal
 
--- Função principal que orquestra todo o processo de edição
+-- função principal que orquestra todo o processo de edição;
 editarMidia_IO :: [Midia] -> IO [Midia]
 editarMidia_IO listaDeMidias = do
+  logMessage "INFO" "Sessão de edição de mídia iniciada."
   putStrLn "-----------"
   putStrLn "Editar item"
   putStrLn "-----------"
@@ -118,6 +157,7 @@ editarMidia_IO listaDeMidias = do
 
   case buscarItem codigo listaDeMidias of
     Nothing -> do
+      logMessage "WARN" ("Tentativa de editar item com código inexistente: " ++ show codigo) -- log
       putStrLn "ERRO: Item não encontrado."
       return listaDeMidias
     Just itemEncontrado -> do
@@ -132,9 +172,11 @@ editarMidia_IO listaDeMidias = do
       case map toLower confirmacao of
         "s" -> do
           let novaLista = map (\m -> if cod m == codigo then itemModificado else m) listaDeMidias
+          logMessage "INFO" ("Mídia com código '" ++ show codigo ++ "' foi alterada.") -- log
           putStrLn "Sucesso! Item atualizado."
           -- AQUI SERIA O LUGAR PARA REGISTRAR O LOG --
           return novaLista
         _ -> do
+          logMessage "INFO" ("Edição da mídia com código '" ++ show codigo ++ "' foi cancelada pelo operador.") -- log
           putStrLn "Edição cancelada."
           return listaDeMidias
