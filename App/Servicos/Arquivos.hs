@@ -1,4 +1,4 @@
-module Services.Arquivos where
+module Servicos.Arquivos where
 
 import Tipos
 import Log.Log
