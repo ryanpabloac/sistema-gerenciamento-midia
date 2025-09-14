@@ -1,5 +1,6 @@
 module Entities.Midias where
 import Tipos
+import Log.Log
 import Data.List
 import Data.Char
 
