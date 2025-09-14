@@ -71,7 +71,7 @@ removerUsuario_IO listaDeUsuarios = do
           return listaDeUsuarios
 
 cadastrarUsuario :: [Usuario] -> IO Usuario
-cadastrarUsuario = do
+cadastrarUsuario listaDeUsuarios = do
   logMessage "INFO" "Sessão de cadastro de novo usuário iniciada."
   putStrLn "--- Cadastro de Novo Usuário ---"
   

@@ -1,6 +1,8 @@
 module Entities.Midias where
 import Tipos
 import Log.Log
+import Data.Time.Calendar (Day, fromGregorian, toGregorian)
+import Data.Time.Clock (utctDay, getCurrentTime)
 import Data.List
 import Data.Char
 
@@ -111,7 +113,7 @@ lerTipoMidia = do
 
 -- função principal;
 cadastrarMidia :: [Midia] -> IO Midia
-cadastrarMidia = do
+cadastrarMidia listaDeMidias = do
   logMessage "INFO" "Sessão de cadastro de nova mídia iniciada." -- log
   -- usa a função auxiliar para pegar os detalhes do tipo e do criador;
   criacaoMidia <- lerTipoMidia
@@ -119,14 +121,14 @@ cadastrarMidia = do
   -- outros dados
   putStr "Digite o título: "
   tituloMidia <- getLine
-  putStr "Digite o ano: "
+  putStr "Digite o ano (número inteiro): "
   anoMidiaStr <- getLine
-  putStr "Digite o CÓDIGO: "
+  putStr "Digite o código (número inteiro): "
   codigoMidiaStr <- getLine
 
   --logMessage "INFO" ("Nova mídia ('" ++ tituloMidia ++ "') criada em memória, aguardando adição à lista principal.") -- log
   
-  resultadoValidacao <- validaNovaMidia codigoMidia anoMidia criacaoMidia listaDeMidias
+  resultadoValidacao <- validaNovaMidia (read codigoMidiaStr :: Codigo) (read anoMidiaStr :: Ano) criacaoMidia listaDeMidias
   
   case resultadoValidacao of
     Left erro -> do
@@ -135,9 +137,9 @@ cadastrarMidia = do
     Right () -> do
       logMessage "INFO" ("Nova mídia ('" ++ tituloMidia ++ "') validada com sucesso.")
       let novaMidia = Midia
-            { cod = codigoMidia
+            { cod = read codigoMidiaStr :: Codigo
             , titulo = tituloMidia
-            , ano = anoMidia
+            , ano = read anoMidiaStr :: Ano
             , criacao = criacaoMidia
             }
       return novaMidia
