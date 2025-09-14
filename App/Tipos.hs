@@ -1,5 +1,5 @@
 module Tipos where
-import Data.Time.Calendar (Day, fromGregorian)
+import Data.Time.Calendar (Day, fromGregorian, toGregorian)
 import Data.Time.Clock (utctDay, getCurrentTime)
 import Data.List
 import Data.Char
