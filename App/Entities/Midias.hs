@@ -42,11 +42,94 @@ validaNovaMidia codItem anoMidia criacaoMidia lista = do
       -- se passou, executa a validação IO;
       validaAno anoMidia criacaoMidia
   
+  
+-- FUNÇÕES DE BUSCA --
+
 -- Retorna Nothing se nao achar
 buscarItem :: Codigo -> [Midia] -> Maybe Midia
 buscarItem cod_busca lista =
   -- a função find retorna o primeiro elemento que satisfaz a condição, embrulhado em um Just. Se nenhum satisfaz, retorna Nothing;
   find (\item -> cod item == cod_busca) lista
+  
+-- função auxiliar que verifica se uma única mídia satisfaz um único critério.
+-- Esta é a base da nossa busca.
+satisfaz :: Midia -> CriterioBusca -> Bool
+satisfaz midia criterio =
+  let
+    -- converte uma string para minúsculas para facilitar a busca;
+    minusculo = map toLower
+    -- função para verificar se a 'substring' está contida na 'stringCompleta'
+    contem sub str = isInfixOf (minusculo sub) (minusculo str)
+  in
+    case criterio of
+      TituloContem txt -> contem txt (titulo midia)
+      CriadorContem txt ->
+        -- 'case' aninhado para verificar o tipo de criador
+        case criacao midia of
+          AutorLivro a -> contem txt a
+          AutorFilme d -> contem txt d
+          AutorJogo  c -> contem txt c
+
+-- função principal da busca;
+-- ela recebe uma lista de critérios e filtra a lista de mídias;
+-- uma mídia só é retornada se satisfizer TODOS os critérios;
+buscarMidiasPorCriterios :: [CriterioBusca] -> [Midia] -> [Midia]
+buscarMidiasPorCriterios criterios lista =
+  -- 'filter' mantém apenas os elementos da lista que retornam True.
+  -- 'all (satisfaz midia) criterios' retorna True se a 'midia' satisfaz todos os critérios na lista 'criterios'.
+  filter (\midia -> all (satisfaz midia) criterios) lista
+
+-- função auxiliar para coletar os critérios do usuário;
+coletarCriterios :: [CriterioBusca] -> IO [CriterioBusca]
+coletarCriterios criteriosAtuais = do
+  putStrLn "\nCritérios atuais:"
+  mapM_ (putStrLn . ("- " ++) . show) criteriosAtuais -- Mostra os critérios já adicionados
+  putStr "Adicione um critério (ex: 'titulo haskell', 'criador kubrick') ou digite 'buscar': "
+  input <- getLine
+
+  case words input of
+    -- se o usuário digitar "buscar", retorna a lista de critérios;
+    ["buscar"] -> return criteriosAtuais
+    -- se digitar um critério válido;
+    ["titulo", termo]  -> coletarCriterios (criteriosAtuais ++ [TituloContem termo])
+    ["criador", termo] -> coletarCriterios (criteriosAtuais ++ [CriadorContem termo])
+    _ -> do
+      putStrLn "Critério inválido. Use 'titulo <termo>' ou 'criador <termo>'."
+      coletarCriterios criteriosAtuais
+
+-- função IO principal para a busca;
+buscarMidias_IO :: [Midia] -> IO ()
+buscarMidias_IO listaDeMidias = do
+  logMessage "INFO" "Sessão de busca avançada de mídia iniciada."
+  putStrLn "-----------"
+  putStrLn "Busca Avançada de Itens"
+  putStrLn "-----------"
+  
+  -- coleta os critérios do usuário
+  criterios <- coletarCriterios []
+  
+  if null criterios
+  then putStrLn "Nenhum critério fornecido. Busca cancelada."
+  else do
+    logMessage "INFO" ("Busca realizada com os critérios: " ++ show criterios)
+    -- chama a função de busca pura
+    let resultados = buscarMidiasPorCriterios criterios listaDeMidias
+    
+    -- mostra os resultados
+    putStrLn $ "\n--- " ++ show (length resultados) ++ " resultado(s) encontrado(s) ---"
+    mapM_ (putStrLn . formatarResultado) resultados
+
+-- função auxiliar para formatar a saída dos resultados da busca
+formatarResultado :: Midia -> String
+formatarResultado m =
+  let criadorStr = case criacao m of
+                     AutorLivro a -> "Autor: " ++ a
+                     AutorFilme d -> "Diretor: " ++ d
+                     AutorJogo  c -> "Criador: " ++ c
+  in "  - Título: " ++ titulo m ++ " | " ++ criadorStr ++ " | Ano: " ++ show (ano m) ++ " | Código: " ++ show (cod m)
+
+
+-- FUNÇÕES REMOVE --
 
 removerItem :: Codigo -> [Midia] -> [Midia]
 removerItem cod_remover lista =
@@ -84,6 +167,9 @@ removerItem_IO listaDeMidias = do
           putStrLn "Remoção cancelada."
           return listaDeMidias
   
+  
+-- FUNÇÕES PARA ADICIONAR MIDIA --
+
 lerTipoMidia :: IO AutorMidia
 lerTipoMidia = do
   putStrLn "Qual o tipo de mídia? (Livro, Filme, Jogo)"

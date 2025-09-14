@@ -44,3 +44,10 @@ data Midia = Midia
   , criacao :: AutorMidia
   }
   deriving (Show, Eq)
+  
+-- tipo para representar os diferentes critérios de busca possíveis
+data CriterioBusca
+  = TituloContem String
+  | CriadorContem String
+  -- Podemos adicionar mais no futuro, como AnoIgualA Int
+  deriving (Show, Eq)
