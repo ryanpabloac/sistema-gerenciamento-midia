@@ -9,25 +9,32 @@ import System.IO
 import Servicos.Arquivos
 import Entities.SubmenuAdicionarMidia
 import Entities.SubmenuAdicionarUsuario
+import Entities.SubmenuEditar
 
 mainLoop :: [Midia] -> [Usuario] -> IO ()
 mainLoop midias usuarios = do
   putStrLn "\n--- MENU PRINCIPAL ---"
-  putStrLn "1 - Gerenciar Mídias"
-  putStrLn "2 - Gerenciar Usuários"
-  putStrLn "3 - Sair"
+  putStrLn "1 - Gerenciar Mídias (Adicionar/Remover/Listar)"
+  putStrLn "2 - Gerenciar Usuários (Adicionar/Remover/Listar)"
+  putStrLn "3 - Editar Dados (Mídias ou Usuários)"
+  putStrLn "4 - Sair"
   putStr "Escolha uma opção: "
   opcao <- getLine
 
   case opcao of
     "1" -> do
-      -- Chama o loop do submenu e passa a lista de mídias atual
       novasMidias <- loopSubmenuMidias midias
       mainLoop novasMidias usuarios
+      
     "2" -> do
       novosUsuarios <- loopSubmenuUsuarios usuarios
       mainLoop midias novosUsuarios
-    "3" -> putStrLn "Saindo..."
+
+    "3" -> do
+      (novasMidias, novosUsuarios) <- loopSubmenuEditar midias usuarios
+      mainLoop novasMidias novosUsuarios
+
+    "4" -> putStrLn "Saindo..."
     _   -> do
       putStrLn "Opção inválida."
       mainLoop midias usuarios
