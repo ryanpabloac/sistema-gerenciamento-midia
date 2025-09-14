@@ -8,6 +8,7 @@ import Log.Log
 import System.IO
 import Servicos.Arquivos
 import Entities.SubmenuAdicionarMidia
+import Entities.SubmenuAdicionarUsuario
 
 mainLoop :: [Midia] -> [Usuario] -> IO ()
 mainLoop midias usuarios = do
@@ -24,8 +25,8 @@ mainLoop midias usuarios = do
       novasMidias <- loopSubmenuMidias midias
       mainLoop novasMidias usuarios
     "2" -> do
-      putStrLn "Submenu de usuários ainda não implementado."
-      mainLoop midias usuarios
+      novosUsuarios <- loopSubmenuUsuarios usuarios
+      mainLoop midias novosUsuarios
     "3" -> putStrLn "Saindo..."
     _   -> do
       putStrLn "Opção inválida."

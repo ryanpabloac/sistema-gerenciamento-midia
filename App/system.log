@@ -1,0 +1,8 @@
+2025-09-14 21:10:08 [INFO] Iniciando carregamento do arquivo de mídias: 'Arquivos/Midia.csv'.
+2025-09-14 21:10:08 [DEBUG] 20 linhas de dados encontradas em 'Arquivos/Midia.csv'.
+2025-09-14 21:10:08 [INFO] Carregamento de 'Arquivos/Midia.csv' concluído. 20 mídias carregadas. 0 linhas com erro.
+2025-09-14 21:10:08 [INFO] Iniciando carregamento do arquivo de usuários: 'Arquivos/Users.csv'.
+2025-09-14 21:10:08 [DEBUG] 5 linhas de dados encontradas em 'Arquivos/Users.csv'.
+2025-09-14 21:10:08 [INFO] Carregamento de 'Arquivos/Users.csv' concluído. 5 usuários carregados. 0 linhas com erro.
+2025-09-14 21:10:13 [INFO] Sessão de cadastro de novo usuário iniciada.
+2025-09-14 21:10:30 [INFO] Novo usuário 'Guilherme' criado com sucesso.
