@@ -2,6 +2,7 @@ module Servicos.Arquivos where
 
 import Tipos
 import Log.Log
+import Data.List
 import Text.Read (readMaybe)
 --import Data.List.Split (splitOn) -- se der para carregar esse modulo, pode remover 
 import Data.Char (toLower)
@@ -94,3 +95,45 @@ carregarMidias caminho = do
     putStrLn $ show numErros ++ " linhas no arquivo de mídias não puderam ser lidas e foram ignoradas. Verifique o arquivo de log para detalhes."
 
   return midiasCarregadas
+  
+-- FUNÇÕES PARA SALVAR ALTERAÇÕES E TER A PERSISTENCIA ENTRE EXECUÇÕES;
+
+-- converte um único usuario para uma linha de CSV;
+formatarUsuario :: Usuario -> String
+formatarUsuario u = intercalate "," [nome u, matricula u, email u]
+
+-- salva uma lista de usuarios no arquivo (sobrescrevendo o antigo);
+salvarUsuarios :: FilePath -> [Usuario] -> IO ()
+salvarUsuarios caminho usuarios = do
+  let cabecalho = "Nome,Matricula,Email"
+  -- converte cada usuário para uma linha de CSV
+  let linhas = map formatarUsuario usuarios
+  -- junta o cabeçalho com as linhas, separando com quebras de linha;
+  let conteudoCompleto = unlines (cabecalho : linhas)
+  
+  -- escreve o conteudo final no arquivo
+  writeFile caminho conteudoCompleto
+  logMessage "INFO" ("Dados de " ++ show (length usuarios) ++ " usuários salvos em '" ++ caminho ++ "'.")
+
+-- converte uma única mídia;
+formatarMidia :: Midia -> String
+formatarMidia m =
+  let
+    -- 'case' para determinar o tipo e o criador corretos;
+    (tipoStr, criadorStr) = case criacao m of
+                              AutorLivro a -> ("Livro", a)
+                              AutorFilme d -> ("Filme", d)
+                              AutorJogo  c -> ("Jogo", c)
+  in
+    -- junta todas as partes com vírgulas
+    intercalate "," [show (cod m), tipoStr, titulo m, show (ano m), criadorStr]
+
+-- salva uma lista de mídias no arquivo;
+salvarMidias :: FilePath -> [Midia] -> IO ()
+salvarMidias caminho midias = do
+  let cabecalho = "Codigo,Tipo,Titulo,Ano,Criador"
+  let linhas = map formatarMidia midias
+  let conteudoCompleto = unlines (cabecalho : linhas)
+  
+  writeFile caminho conteudoCompleto
+  logMessage "INFO" ("Dados de " ++ show (length midias) ++ " mídias salvas em '" ++ caminho ++ "'.")

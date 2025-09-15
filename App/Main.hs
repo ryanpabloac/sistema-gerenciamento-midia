@@ -34,7 +34,12 @@ mainLoop midias usuarios = do
       (novasMidias, novosUsuarios) <- loopSubmenuEditar midias usuarios
       mainLoop novasMidias novosUsuarios
 
-    "4" -> putStrLn "Saindo..."
+    "4" -> do
+      putStrLn "Salvando alterações nos arquivos..."
+      salvarMidias "Arquivos/midias.csv" midias
+      salvarUsuarios "Arquivos/usuarios.csv" usuarios
+      putStrLn "Dados salvos com sucesso. Saindo..."
+      putStrLn "Saindo..."
     _   -> do
       putStrLn "Opção inválida."
       mainLoop midias usuarios
