@@ -10,8 +10,8 @@ tipoMidia emp =
     AutorFilme _ -> TipoFilme
     AutorJogo  _ -> TipoJogo
     
-EmprestimosAtivos :: [Emprestimo] -> IO ()
-EmprestimosAtivos emprestimos = do
+emprestimosAtivos :: [Emprestimo] -> IO ()
+emprestimosAtivos emprestimos = do
   putStrLn "\n--- Empréstimos Ativos (por Categoria) ---"
   let agruparPorTipo = groupBy ((==) `on` tipoMidia) (sortOn tipoMidia emprestimos) -- ordenação com base no tipo de mídia, posteriorente à ordenação é agrupado por "groupBy";
   mapM_ imprimirGrupos agruparPorTipo
@@ -30,8 +30,8 @@ EmprestimosAtivos emprestimos = do
                  " | Usuário: " ++ nome (emprestimoUsuario e) ++
                  " | Data: " ++ show (dataEmprestimo e)
 
-UsuariosMaisAtivos :: [Emprestimo] -> IO ()
-UsuariosMaisAtivos emprestimos = do
+usuariosMaisAtivos :: [Emprestimo] -> IO ()
+usuariosMaisAtivos emprestimos = do
   putStrLn "\n--- Usuários mais ativos ---"
   let agruparPorUsuario = group (sortOn matricula (map emprestimoUsuario emprestimos)) -- Extrai os usuários de cada emprestimo, posteriormente os ordena por meio da matricula, após isso os agrupa
   let contagemPorUsuario = [ (head g, length g) | g <- agruparPorUsuario ]             -- Pega o primeiro elemento da lista, e conta quantas vezes aparece, armazenando tais informações em uma tupla
@@ -41,8 +41,8 @@ UsuariosMaisAtivos emprestimos = do
     imprimirUsuario (usuario, quantidade) =
       putStrLn $ "| Nome: " ++ nome usuario ++ " (" ++ matricula usuario ++ "): realizou " ++ show quantidade ++ " empréstimos"
       
-ItensMaisEmprestados :: [Emprestimo] -> IO () -- Funciona de maneira semelhante à função de usuários mais ativos;
-ItensMaisEmprestados emprestimos = do
+itensMaisEmprestados :: [Emprestimo] -> IO () -- Funciona de maneira semelhante à função de usuários mais ativos;
+itensMaisEmprestados emprestimos = do
   putStrLn "\n--- Itens mais emprestados ---"
   let agruparPorCodigo = group (sortOn cod (map emprestimoMidia emprestimos))
   let contagemPorCodigo = [ (head g, length g) | g <- agruparPorCodigo]
@@ -52,8 +52,8 @@ ItensMaisEmprestados emprestimos = do
     imprimirMidia (midia, quantidade) =
       putStrLn $ "| Título: " ++ titulo midia ++ ": " ++ show quantidade ++ " empréstimos"
 
-FrequenciaEmprestimos :: [Emprestimo] -> IO ()
-FrequenciaEmprestimos emprestimos = do
+frequenciaEmprestimos :: [Emprestimo] -> IO ()
+frequenciaEmprestimos emprestimos = do
   putStrLn "\n--- Frequência de Empréstimos por Período ---"
   let agrupamentodatas = group . sort $ map dataEmprestimo emprestimos
   mapM_ imprimirfrequencia agrupamentodatas
