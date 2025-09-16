@@ -27,16 +27,16 @@ loopSubmenuRelatorio :: [Emprestimo] -> [ListaEspera] -> String -> IO ()
 loopSubmenuRelatorio listaDeEmprestimos listaDeEspera opcao = do
   case opcao of
     "1" -> do
-      EmprestimosAtivos listaDeEmprestimos
+      emprestimosAtivos listaDeEmprestimos
       Relatorio listaDeEmprestimos listaDeEspera
     "2" -> do
-      UsuariosMaisAtivos listaDeEmprestimos
+      usuariosMaisAtivos listaDeEmprestimos
       Relatorio listaDeEmprestimos listaDeEspera
     "3" -> do
-      ItensMaisEmprestados listaDeEmprestimos
+      itensMaisEmprestados listaDeEmprestimos
       Relatorio listaDeEmprestimos listaDeEspera
     "4" -> do
-      FrequenciaEmprestimos listaDeEmprestimos
+      frequenciaEmprestimos listaDeEmprestimos
       Relatorio listaDeEmprestimos listaDeEspera
     "5" -> do
       itensComListaEspera listaDeEspera
