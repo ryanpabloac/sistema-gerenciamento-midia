@@ -51,3 +51,16 @@ data CriterioBusca
   | CriadorContem String
   -- Podemos adicionar mais no futuro, como AnoIgualA Int
   deriving (Show, Eq)
+
+-- Tipo para emprestimo
+data Emprestimo = Emprestimo
+  { emprestimoUsuario :: Usuario
+  , emprestimoMidia :: Midia
+  , dataEmprestimo :: Day
+  } deriving (Show, Eq)
+
+-- Tipo para uma lista de espera
+data ListaEspera = ListaEspera
+  { itemEmEspera :: Midia
+  , usuariosNaFila :: [Usuario]
+  } deriving (Show)
