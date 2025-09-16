@@ -31,8 +31,7 @@ EmprestimosAtivos emprestimos = do
   mapM_ imprimirGrupos agruparPorTipo
   where
     imprimirGrupos xs = do
-      let tipo = tipoMidia (head xs)                                                -- Captura o tipo de midia do primeiro argumento do grupo;
-      putStrLn ""                                               
+      let tipo = tipoMidia (head xs)                                                -- Captura o tipo de midia do primeiro argumento do grupo;                                               
       case tipo of 
         TipoLivro -> putStrLn "Empréstimos ativos - Livros"
         TipoFilme -> putStrLn "Empréstimos ativos - Filmes"
@@ -53,18 +52,46 @@ UsuariosMaisAtivos emprestimos = do
   let usariosDoTopo = take 5 (reverse (sortOn snd contagemPorUsuario))                 -- Ordena as tuplas por meio da quantidade de vezes que aparece, e reverte a ordem da lista, ficando os elementos que mais aparecem nas primeiras posições
   mapM_ imprimirUsuario usariosDoTopo
   where
-    imprimirUsuario (usuario, count) =
-      putStrLn $ "| Nome: " ++ nome usuario ++ " (" ++ matricula usuario ++ "): realizou " ++ show count ++ " empréstimos"
+    imprimirUsuario (usuario, quantidade) =
+      putStrLn $ "| Nome: " ++ nome usuario ++ " (" ++ matricula usuario ++ "): realizou " ++ show quantidade ++ " empréstimos"
+      
+ItensMaisEmprestados :: [Emprestimo] -> IO () -- Funciona de maneira semelhante à função de usuários mais ativos;
+ItensMaisEmprestados emprestimos = do
+  putStrLn "\n--- Itens mais emprestados ---"
+  let agruparPorCodigo = group (sortOn cod (map emprestimoMidia emprestimos))
+  let contagemPorCodigo = [ (head g, length g) | g <- agruparPorCodigo]
+  let topMidias = take 10 (reverse (sortOn snd contagemPorCodigo))
+  mapM_ imprimirMidia topMidias
+  where
+    imprimirMidia (midia, quantidade) =
+      putStrLn $ "| Título: " ++ titulo midia ++ ": " ++ show quantidade ++ " empréstimos"
 
+FrequenciaEmprestimos :: [Emprestimo] -> IO ()
+FrequenciaEmprestimos emprestimos = do
+  putStrLn "\n--- Frequência de Empréstimos por Período ---"
+  let agrupamentodatas = group . sort $ map dataEmprestimo emprestimos
+  mapM_ imprimirfrequencia agrupamentodatas
+  where 
+    imprimirfrequencia grupo = do
+    let dataEmp    = head grupo
+    let quantidade =  length grupo
+    putStrLn $ "| Data: " ++ show dataEmp ++ ": " ++ show quantidade ++ " empréstimos"
 
-
-
-
-
+itensComListaEspera :: [ListaEspera] -> IO ()
+itensComListaEspera xs = do
+  putStrLn "\n--- Itens com lista de espera ---"
+  if null xs
+    then putStrLn "Nenhum Item com lista de espera no momento"
+    else mapM_ imprimirListaEspera xs
+  where
+    imprimirListaEspera xs = do 
+      let tituloMidia = titulo (itemEmEspera xs)
+      let numUsuarios = length (usuariosNaFila xs)
+      putStrLn $ "| Título: " ++ tituloMidia ++ ": " ++ show numUsuarios ++ " pessoas na fila"
 
 -- NOTE: Necessidade de passar a lista de emprestimos feita na aba de movimentação;
-Relatorio :: [Emprestimo] -> IO ()
-Relatorio listaDeEmprestimos = do
+Relatorio :: [Emprestimo] -> [ListaEspera] -> IO ()
+Relatorio listaDeEmprestimos listaDeEspera = do
   putStrLn "\n======================="
   putStrLn "Relatórios e Estatísticas"
   putStrLn "======================="
@@ -78,36 +105,34 @@ Relatorio listaDeEmprestimos = do
   putStr "Escolha uma opção: "
   
   opcao <- getLine
-  loopSubmenuRelatorio listaDeEmprestimos opcao
+  loopSubmenuRelatorio listaDeEmprestimos listaDeEspera opcao
 
--- Loop principal do submenu.
-loopSubmenuRelatorio :: [Emprestimo] -> String -> IO ()
-loopSubmenuRelatorio listaDeEmprestimos opcao = do
+loopSubmenuRelatorio :: [Emprestimo] -> [ListaEspera] -> String -> IO ()
+loopSubmenuRelatorio listaDeEmprestimos listaDeEspera opcao = do
   case opcao of
-    "1" -> do 
+    "1" -> do
       EmprestimosAtivos listaDeEmprestimos
-      Relatorio listaDeEmprestimos 
+      Relatorio listaDeEmprestimos listaDeEspera
     "2" -> do
       UsuariosMaisAtivos listaDeEmprestimos
-      Relatorio listaDeEmprestimos
+      Relatorio listaDeEmprestimos listaDeEspera
     "3" -> do
-      
-      Relatorio listaDeEmprestimos
+      ItensMaisEmprestados listaDeEmprestimos
+      Relatorio listaDeEmprestimos listaDeEspera
     "4" -> do
-      
-      Relatorio listaDeEmprestimos
+      FrequenciaEmprestimos listaDeEmprestimos
+      Relatorio listaDeEmprestimos listaDeEspera
     "5" -> do
-     
-      Relatorio listaDeEmprestimos
+      itensComListaEspera listaDeEspera
+      Relatorio listaDeEmprestimos listaDeEspera
     "6" -> do
-     
-      Relatorio listaDeEmprestimos
-    "7" ->
-      putStrLn "Voltando ao menu principal." -- Não sei como retornao ao menu principal;
+      
+      Relatorio listaDeEmprestimos listaDeEspera
+    "7" -> do
+      putStrLn "Voltando ao menu principal."
     _ -> do
       putStrLn "Opção inválida. Tente novamente."
-      -- Chama o menu novamente para o usuário tentar outra opção
-      Relatorio listaDeEmprestimos
+      Relatorio listaDeEmprestimos listaDeEspera
 
 
 
