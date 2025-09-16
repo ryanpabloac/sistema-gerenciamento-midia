@@ -6,8 +6,8 @@ import System.IO (hSetBuffering, stdout, BufferMode(LineBuffering))
 
 
 -- NOTE: Necessidade de passar a lista de emprestimos feita na aba de movimentação;
-Relatorio :: [Emprestimo] -> [ListaEspera] -> IO ()
-Relatorio listaDeEmprestimos listaDeEspera = do
+relatorio :: [Emprestimo] -> [ListaEspera] -> IO ()
+relatorio listaDeEmprestimos listaDeEspera = do
   putStrLn "\n======================="
   putStrLn "Relatórios e Estatísticas"
   putStrLn "======================="
@@ -28,24 +28,24 @@ loopSubmenuRelatorio listaDeEmprestimos listaDeEspera opcao = do
   case opcao of
     "1" -> do
       emprestimosAtivos listaDeEmprestimos
-      Relatorio listaDeEmprestimos listaDeEspera
+      relatorio listaDeEmprestimos listaDeEspera
     "2" -> do
       usuariosMaisAtivos listaDeEmprestimos
-      Relatorio listaDeEmprestimos listaDeEspera
+      relatorio listaDeEmprestimos listaDeEspera
     "3" -> do
       itensMaisEmprestados listaDeEmprestimos
-      Relatorio listaDeEmprestimos listaDeEspera
+      relatorio listaDeEmprestimos listaDeEspera
     "4" -> do
       frequenciaEmprestimos listaDeEmprestimos
-      Relatorio listaDeEmprestimos listaDeEspera
+      relatorio listaDeEmprestimos listaDeEspera
     "5" -> do
       itensComListaEspera listaDeEspera
-      Relatorio listaDeEmprestimos listaDeEspera
+      relatorio listaDeEmprestimos listaDeEspera
     "6" -> do
       
-      Relatorio listaDeEmprestimos listaDeEspera
+      relatorio listaDeEmprestimos listaDeEspera
     "7" -> do
       putStrLn "Voltando ao menu principal."
      _ -> do
       putStrLn "Opção inválida. Tente novamente."
-      Relatorio listaDeEmprestimos listaDeEspera
+      relatorio listaDeEmprestimos listaDeEspera
