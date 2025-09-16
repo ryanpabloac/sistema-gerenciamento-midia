@@ -85,7 +85,7 @@ loopSubmenuRelatorio :: [Emprestimo] -> String -> IO ()
 loopSubmenuRelatorio listaDeEmprestimos opcao = do
   case opcao of
     "1" -> do 
-      emprestimosAtivos listaDeEmprestimos
+      EmprestimosAtivos listaDeEmprestimos
       Relatorio listaDeEmprestimos 
     "2" -> do
       UsuariosMaisAtivos listaDeEmprestimos
