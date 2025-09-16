@@ -1,6 +1,6 @@
-module Servicos.Arquivos where
+module Src.Services.Arquivos where
 
-import Tipos
+import Entities.Tipos
 import Log.Log
 import Data.List
 import Text.Read (readMaybe)

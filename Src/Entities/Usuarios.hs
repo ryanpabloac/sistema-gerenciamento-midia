@@ -1,5 +1,5 @@
 module Entities.Usuarios where
-import Tipos
+import Entities.Tipos
 import Log.Log
 import Data.List
 import Data.Char

@@ -1,5 +1,5 @@
 module Entities.Midias where
-import Tipos
+import Entities.Tipos
 import Log.Log
 import Data.Time.Calendar (Day, fromGregorian, toGregorian)
 import Data.Time.Clock (utctDay, getCurrentTime)

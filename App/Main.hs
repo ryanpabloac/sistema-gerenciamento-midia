@@ -1,12 +1,12 @@
 module Main where
 
 -- Importa os tipos de dados
-import Tipos
+import Entities.Tipos
 import Entities.Usuarios
 import Entities.Midias
 import Log.Log
 import System.IO
-import Servicos.Arquivos
+import Src.Services.Arquivos
 import Entities.SubmenuAdicionarMidia
 import Entities.SubmenuAdicionarUsuario
 import Entities.SubmenuEditar
@@ -36,8 +36,8 @@ mainLoop midias usuarios = do
 
     "4" -> do
       putStrLn "Salvando alterações nos arquivos..."
-      salvarMidias "Arquivos/midias.csv" midias
-      salvarUsuarios "Arquivos/usuarios.csv" usuarios
+      salvarMidias "Src/Services/Arquivos/midias.csv" midias
+      salvarUsuarios "Src/Services/Arquivos/usuarios.csv" usuarios
       putStrLn "Dados salvos com sucesso. Saindo..."
       putStrLn "Saindo..."
     _   -> do
@@ -48,8 +48,8 @@ main :: IO ()
 main = do
   hSetBuffering stdout NoBuffering
   
-  listaDeMidias <- carregarMidias "Arquivos/Midia.csv"
-  listaDeUsuarios <- carregarUsuarios "Arquivos/Users.csv"
+  listaDeMidias <- carregarMidias "Src/Services/Arquivos/Midia.csv"
+  listaDeUsuarios <- carregarUsuarios "Src/Services/Arquivos/Users.csv"
   
   mainLoop listaDeMidias listaDeUsuarios
 
@@ -59,8 +59,8 @@ main = do
   putStrLn "--- INICIANDO TESTE DE CARREGAMENTO DE ARQUIVOS CSV ---"
 
   -- Define os caminhos corretos para os arquivos CSV
-  let caminhoMidias = "Arquivos/Midia.csv"
-  let caminhoUsuarios = "Arquivos/Users.csv"
+  let caminhoMidias = "Src/Services/Arquivos/Midia.csv"
+  let caminhoUsuarios = "Src/Services/Arquivos/Users.csv"
 
   -- Chama a função para carregar as mídias
   listaDeMidias <- carregarMidias caminhoMidias

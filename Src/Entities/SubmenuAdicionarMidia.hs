@@ -1,6 +1,6 @@
 module Entities.SubmenuAdicionarMidia where
 
-import Tipos
+import Entities.Tipos
 import Entities.Midias
 import System.IO (hSetBuffering, stdout, BufferMode(LineBuffering))
 

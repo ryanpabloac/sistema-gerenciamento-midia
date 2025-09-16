@@ -1,5 +1,5 @@
 module Entities.SubmenuEditar where
-import Tipos
+import Entities.Tipos
 import Entities.Midias
 import Entities.Usuarios
 

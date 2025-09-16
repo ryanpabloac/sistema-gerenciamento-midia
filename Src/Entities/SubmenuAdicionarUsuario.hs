@@ -1,5 +1,5 @@
 module Entities.SubmenuAdicionarUsuario where
-import Tipos
+import Entities.Tipos
 import Entities.Usuarios
 
 -- mesmas funçoes de midia;

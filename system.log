@@ -1,0 +1,17 @@
+2025-09-16 00:57:00 [INFO] Iniciando carregamento do arquivo de mídias: 'Arquivos/Midia.csv'.
+2025-09-16 01:00:15 [INFO] Iniciando carregamento do arquivo de mídias: 'App/Arquivos/Midia.csv'.
+2025-09-16 01:00:15 [DEBUG] 20 linhas de dados encontradas em 'App/Arquivos/Midia.csv'.
+2025-09-16 01:00:15 [INFO] Carregamento de 'App/Arquivos/Midia.csv' concluído. 20 mídias carregadas. 0 linhas com erro.
+2025-09-16 01:00:15 [INFO] Iniciando carregamento do arquivo de usuários: 'App/Arquivos/Users.csv'.
+2025-09-16 01:00:15 [DEBUG] 5 linhas de dados encontradas em 'App/Arquivos/Users.csv'.
+2025-09-16 01:00:15 [INFO] Carregamento de 'App/Arquivos/Users.csv' concluído. 5 usuários carregados. 0 linhas com erro.
+2025-09-16 01:00:20 [INFO] Dados de 20 mídias salvas em 'App/Arquivos/midias.csv'.
+2025-09-16 01:00:20 [INFO] Dados de 5 usuários salvos em 'App/Arquivos/usuarios.csv'.
+2025-09-16 01:04:25 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/Midia.csv'.
+2025-09-16 01:04:25 [DEBUG] 20 linhas de dados encontradas em 'Src/Services/Arquivos/Midia.csv'.
+2025-09-16 01:04:25 [INFO] Carregamento de 'Src/Services/Arquivos/Midia.csv' concluído. 20 mídias carregadas. 0 linhas com erro.
+2025-09-16 01:04:25 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/Users.csv'.
+2025-09-16 01:04:25 [DEBUG] 5 linhas de dados encontradas em 'Src/Services/Arquivos/Users.csv'.
+2025-09-16 01:04:25 [INFO] Carregamento de 'Src/Services/Arquivos/Users.csv' concluído. 5 usuários carregados. 0 linhas com erro.
+2025-09-16 01:04:40 [INFO] Dados de 20 mídias salvas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-16 01:04:40 [INFO] Dados de 5 usuários salvos em 'Src/Services/Arquivos/usuarios.csv'.

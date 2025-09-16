@@ -1,4 +1,4 @@
-module Tipos where
+module Entities.Tipos where
 import Data.Time.Calendar (Day, fromGregorian, toGregorian)
 import Data.Time.Clock (utctDay, getCurrentTime)
 import Data.List
