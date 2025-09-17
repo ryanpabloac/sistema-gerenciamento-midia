@@ -1,8 +1,5 @@
 module Entities.Tipos where
-import Data.Time.Calendar (Day, fromGregorian, toGregorian)
-import Data.Time.Clock (utctDay, getCurrentTime)
-import Data.List
-import Data.Char
+import Data.Time.Calendar (Day)
 
 -- SINÔNIMOS DE TIPO
 -- usuarios

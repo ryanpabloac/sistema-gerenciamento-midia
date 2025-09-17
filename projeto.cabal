@@ -19,11 +19,20 @@ common warnings
 executable sistema
     import:          warnings
     main-is:         Main.hs
-    hs-source-dirs:  app
-    -- other-modules:
+    hs-source-dirs:  App, Src
+    other-modules:
+        Entities.Midias 
+        Entities.SubmenuAdicionarMidia 
+        Entities.SubmenuAdicionarUsuario 
+        Entities.SubmenuEditar 
+        Entities.Tipos 
+        Entities.Usuarios 
+        Services.Arquivos 
+        Services.Movimentacoes 
+        Log.Log 
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
 
-    build-depends:    base ^>=4.18.3.0
+    build-depends:    base ^>=4.18.3.0, time
     default-language: Haskell2010

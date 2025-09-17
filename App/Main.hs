@@ -1,11 +1,8 @@
 module Main where
 
 import Entities.Tipos
-import Entities.Usuarios
-import Entities.Midias
-import Log.Log
 import System.IO
-import Src.Services.Arquivos
+import Services.Arquivos
 import Entities.SubmenuAdicionarMidia
 import Entities.SubmenuAdicionarUsuario
 import Entities.SubmenuEditar

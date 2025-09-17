@@ -1,9 +1,10 @@
-module Src.Services.Arquivos where
+module Services.Arquivos where
 
 import Entities.Tipos
 import Log.Log
 import Data.List
 import Text.Read (readMaybe)
+import Data.Time.Calendar (Day)
 --import Data.List.Split (splitOn) -- se der para carregar esse modulo, pode remover 
 import Data.Char (toLower)
 import Control.Monad (forM, when) -- troca o foldr por forM, permitindo executar uma ação de IO (logMessage) para cada linha do arquivo, algo que o foldr (puro) não permite;
@@ -25,7 +26,7 @@ splitPor delimitador str =
 parseUsuario :: String -> Either String Usuario
 parseUsuario linha =
   case splitPor ',' linha of
-    [nome, matricula, email] -> Right $ Usuario nome matricula email
+    [n, m, e] -> Right (Usuario n m e)
     _ -> Left $ "Linha de usuário mal formatada: " ++ linha
 
 -- função principal de carregamento;
@@ -137,3 +138,48 @@ salvarMidias caminho midias = do
   
   writeFile caminho conteudoCompleto
   logMessage "INFO" ("Dados de " ++ show (length midias) ++ " mídias salvas em '" ++ caminho ++ "'.")
+
+parseEmprestimo :: [Usuario] -> [Midia] -> String -> Maybe Emprestimo
+parseEmprestimo usuarios midias linha =
+  case splitPor ',' linha of
+    [matStr, codStr, dataStr] -> do
+      let codigo = readMaybe codStr :: Maybe Codigo
+      let dEmprestimo = readMaybe dataStr :: Maybe Day
+      usuario <- find (\u -> matricula u == matStr) usuarios
+      midia <- find (\m -> cod m == read codStr) midias
+      cod <- codigo
+      dataEmprestimo <- dEmprestimo
+      return $ Emprestimo usuario midia dataEmprestimo
+    _ -> Nothing
+ 
+ 
+carregarEmprestimos :: FilePath -> [Usuario] -> [Midia] -> IO [Emprestimo]
+carregarEmprestimos caminho usuarios midias = do
+  logMessage "INFO" ("Iniciando carregamento do arquivo de empréstimos: '" ++ caminho ++ "'.")
+  conteudo <- readFile caminho
+  let linhas = tail (lines conteudo)
+  let maybeEmprestimos = catMaybes $ map (parseEmprestimo usuarios midias) linhas
+  let numErros = length linhas - length maybeEmprestimos
+  
+  logMessage "INFO" ("Carregamento de '" ++ caminho ++ "' concluído. " ++ show (length maybeEmprestimos) ++ " empréstimos carregados. " ++ show numErros ++ " linhas com erro.")
+
+  when (numErros > 0) $
+    putStrLn $ show numErros ++ " linhas no arquivo de empréstimos não puderam ser lidas e foram ignoradas. Verifique o arquivo de log para detalhes."
+    
+  return maybeEmprestimos
+ 
+ 
+formatarEmprestimo :: Emprestimo -> String
+formatarEmprestimo e =
+  intercalate "," [matricula (emprestimoUsuario e), show (cod (emprestimoMidia e)), show (dataEmprestimo e)]
+  
+ 
+ 
+salvarEmprestimos :: FilePath -> [Emprestimo] -> IO ()
+salvarEmprestimos caminho emprestimos = do
+  let cabecalho = "Matricula,Codigo,Data"
+  let linhas = map formatarEmprestimo emprestimos
+  let conteudoCompleto = unlines (cabecalho : linhas)
+  
+  writeFile caminho conteudoCompleto
+  logMessage "INFO" ("Dados de " ++ show (length emprestimos) ++ " empréstimos salvos em '" ++ caminho ++ "'.")
