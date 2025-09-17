@@ -74,3 +74,23 @@ itensComListaEspera xs = do
       let tituloMidia = titulo (itemEmEspera xs)
       let numUsuarios = length (usuariosNaFila xs)
       putStrLn $ "| Título: " ++ tituloMidia ++ ": " ++ show numUsuarios ++ " pessoas na fila"
+
+relatorioOperacoes :: [Emprestimo] -> IO ()
+relatorioOperacoes emprestimos = do
+  putStrLn "\n--- Relatório de Operações ---"
+  putStrLn "Digite o nome do usuário ou o tipo de mídia (Livro, Filme, Jogo):"
+  putStr "Critério de busca: "
+  criterio <- getLine
+  putStrln $ "\nResultados para: \"" ++ criterio ++ "\""
+  let resultados = filter (filtraPorCriterio criterio) emprestimos
+  if null resultados
+    then putStrLn "Nenhuma operação encontrada para este critério."
+    else mapM_ imprimirDetalhesOperacao resultados
+  where
+    filtraPorCriterio criterio e =
+      (nome (emprestimoUsuario e) == criterio) ||
+      (show (tipoMidia e) == criterio)
+    imprimirDetalhesOperacao e =
+      putStrLn $ "| Título : " ++ titulo (emprestimoMidia e) ++
+                 " emprestado por " ++ nome (emprestimoUsuario e) ++
+                 " em " ++ show (dataEmprestimo e)
