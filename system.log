@@ -232,3 +232,61 @@
 2025-09-18 16:48:15 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
 2025-09-18 16:48:18 [INFO] Sessão de busca avançada de mídia iniciada.
 2025-09-18 16:48:27 [INFO] Busca realizada com os critérios: [CriadorContem "Agatha"]
+2025-09-18 16:56:44 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 16:56:44 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 16:56:44 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 16:56:44 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 16:56:44 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 16:56:44 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
+2025-09-18 16:56:44 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 17:13:00 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 17:13:00 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 17:13:00 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 17:13:00 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 17:13:00 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 17:13:00 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
+2025-09-18 17:13:00 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 17:14:14 [INFO] Sessão de cadastro de nova mídia iniciada.
+2025-09-18 17:14:18 [DEBUG] Usuário selecionou o tipo 'Livro'.
+2025-09-18 17:15:03 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 17:15:03 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 17:15:03 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 17:15:03 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 17:15:03 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 17:15:03 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
+2025-09-18 17:15:03 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 17:15:08 [INFO] Sessão de cadastro de nova mídia iniciada.
+2025-09-18 17:15:12 [WARN] Usuário inseriu um tipo de mídia inválido: 'L'.
+2025-09-18 17:15:15 [DEBUG] Usuário selecionou o tipo 'Livro'.
+2025-09-18 17:16:01 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 17:16:01 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 17:16:01 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 17:16:01 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 17:16:01 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 17:16:01 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
+2025-09-18 17:16:01 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 17:16:33 [INFO] Sessão de cadastro de nova mídia iniciada.
+2025-09-18 17:16:36 [DEBUG] Usuário selecionou o tipo 'Livro'.
+2025-09-18 17:17:06 [INFO] Sessão de cadastro de nova mídia iniciada.
+2025-09-18 17:17:11 [DEBUG] Usuário selecionou o tipo 'Livro'.
+2025-09-18 17:17:32 [INFO] Nova mídia ('Duna') validada com sucesso.
+2025-09-18 17:17:35 [INFO] Sessão de cadastro de nova mídia iniciada.
+2025-09-18 17:17:42 [DEBUG] Usuário selecionou o tipo 'Livro'.
+2025-09-18 17:18:01 [INFO] Nova mídia ('Duna 2') validada com sucesso.
+2025-09-18 17:18:39 [INFO] Sessão de cadastro de novo usuário iniciada.
+2025-09-18 17:18:50 [INFO] Sessão de cadastro de novo usuário iniciada.
+2025-09-18 17:19:04 [INFO] Novo usuário 'Pedro' criado com sucesso.
+2025-09-18 17:19:27 [INFO] Iniciando processo de empréstimo.
+2025-09-18 17:19:27 [INFO] Usuário e mídia encontrados. Verificando disponibilidade da mídia: Duna
+2025-09-18 17:19:27 [INFO] Novo empréstimo criado: Emprestimo {emprestimoUsuario = Usuario {nome = "Pedro", matricula = "12411", email = "pedro.varise@ufu.br"}, emprestimoMidia = Midia {cod = 1234, titulo = "Duna", ano = 1989, criacao = AutorLivro {autor = "Frank Hebert"}}, dataEmprestimo = 2025-09-18}
+2025-09-18 17:20:08 [INFO] Iniciando processo de empréstimo.
+2025-09-18 17:20:08 [WARN] Tentativa de empréstimo com matrícula inexistente: 123
+2025-09-18 17:20:49 [INFO] Iniciando processo de empréstimo.
+2025-09-18 17:20:49 [INFO] Usuário e mídia encontrados. Verificando disponibilidade da mídia: Duna
+2025-09-18 17:20:49 [WARN] Tentativa de emprestar uma mídia já emprestada.
+2025-09-18 17:22:03 [INFO] Sessão de edição de mídia iniciada.
+2025-09-18 17:22:16 [INFO] Mídia com código '1234' foi alterada.
+2025-09-18 17:23:41 [INFO] Iniciando processo de devolução.
+2025-09-18 17:23:41 [INFO] Devolução encontrada. Removendo o empréstimo: Emprestimo {emprestimoUsuario = Usuario {nome = "Pedro", matricula = "12411", email = "pedro.varise@ufu.br"}, emprestimoMidia = Midia {cod = 1234, titulo = "Duna", ano = 1989, criacao = AutorLivro {autor = "Frank Hebert"}}, dataEmprestimo = 2025-09-18}
+2025-09-18 17:23:51 [INFO] Dados de 23 mídias salvas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 17:23:51 [INFO] Dados de 8 usuários salvos em 'Src/Services/Arquivos/usuarios.csv'.
