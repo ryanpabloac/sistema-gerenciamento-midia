@@ -10,7 +10,7 @@
 ## Processo de instalação
 1° Passo - Verificar a versão de seu sistema operacional Ubuntu, pois cada versão exige seus pré-requisitos <br>
 2° Passo - Com base na sua versão, consultar a lista abaixo: <br>
-**   Versão genérica: Os seguintes pacotes de distribuição são necessários: build-essential curl libffi-dev libffi6 libgmp-dev libgmp10 libncurses-dev libncurses5 libtinfo5 git <br>
+ **Versão genérica: Os seguintes pacotes de distribuição são necessários: build-essential curl libffi-dev libffi6 libgmp-dev libgmp10 libncurses-dev libncurses5 libtinfo5 git <br>
    Version >= 20.04 && < 20.10: Os seguintes pacotes de distribuição são necessários: build-essential curl libffi-dev libffi7 libgmp-dev libgmp10 libncurses-dev libncurses5 libtinfo5 git <br>
    Version >= 20.10 && < 23: Os seguintes pacotes de distribuição são necessários: build-essential curl libffi-dev libffi8ubuntu1 libgmp-dev libgmp10 libncurses-dev libncurses5 libtinfo5 git <br>
    Version >= 23: Os seguintes pacotes de distribuição são necessários: build-essential curl libffi-dev libffi8ubuntu1 libgmp-dev libgmp10 libncurses-dev git <br>**
