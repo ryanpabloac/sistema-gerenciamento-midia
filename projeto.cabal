@@ -29,6 +29,7 @@ executable sistema
         Entities.SubmenuEditar 
         Entities.Tipos 
         Entities.Usuarios 
+        Entities.Historico 
         Services.Arquivos 
         Services.Movimentacoes 
         Services.SubmenuMovimentacoes 

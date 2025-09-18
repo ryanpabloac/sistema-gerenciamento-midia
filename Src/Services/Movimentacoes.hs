@@ -1,14 +1,15 @@
 module Services.Movimentacoes where
 
 import Data.List (find)
+import Data.Char (toLower)
 import Data.Time.Clock (getCurrentTime, utctDay)
 import Data.List (findIndex)
 import Entities.Tipos
 import Log.Log
 import Entities.Historico (registrarOperacao)
 
-realizarEmprestimo :: [Usuario] -> [Midia] -> [Emprestimo] -> Matricula -> Codigo -> IO (Maybe Emprestimo)
-realizarEmprestimo usuarios midias emprestimosAtivos matStr codigo = do
+realizarEmprestimo :: [Usuario] -> [Midia] -> [Emprestimo] -> [ListaEspera] -> Matricula -> Codigo -> IO (Maybe Emprestimo, [ListaEspera])
+realizarEmprestimo usuarios midias emprestimosAtivos fila matStr codigo = do
   logMessage "INFO" "Iniciando processo de empréstimo."
 
   let maybeUsuario = find (\u -> matricula u == matStr) usuarios
@@ -21,10 +22,15 @@ realizarEmprestimo usuarios midias emprestimosAtivos matStr codigo = do
       let midiaJaEmprestada = any (\e -> cod (emprestimoMidia e) == codigo) emprestimosAtivos
 
       if midiaJaEmprestada
-        then do
-          logMessage "WARN" "Tentativa de emprestar uma mídia já emprestada."
-          putStrLn "ERRO: Esta mídia já está emprestada."
-          return Nothing
+      then do
+           putStrLn "Mídia já emprestada. Deseja entrar na lista de espera? (S/N)"
+           resposta <- getLine
+           if map toLower resposta == "s"
+           then do
+                let novaFila = adicionarNaEspera usuario midia fila
+                putStrLn "Você foi adicionado à lista de espera."
+                return (Nothing, novaFila)
+           else return (Nothing, fila)
         else do
           currentTime <- getCurrentTime
           let dataAtual = utctDay currentTime
@@ -34,21 +40,22 @@ realizarEmprestimo usuarios midias emprestimosAtivos matStr codigo = do
                 , emprestimoMidia = midia
                 , dataEmprestimo = dataAtual
                 }
+          
           registrarOperacao "EMPRÉSTIMO" usuario midia
           logMessage "INFO" ("Novo empréstimo criado: " ++ show novoEmprestimo)
           putStrLn "Empréstimo realizado com sucesso!"
           putStrLn $ "Mídia: " ++ titulo midia ++ " emprestada para " ++ nome usuario ++ "."
-          return (Just novoEmprestimo)
+          return (Just novoEmprestimo, fila)
 
     (Nothing, _) -> do
       logMessage "WARN" ("Tentativa de empréstimo com matrícula inexistente: " ++ matStr)
       putStrLn "ERRO: Usuário não encontrado."
-      return Nothing
+      return (Nothing,fila)
 
     (_, Nothing) -> do
       logMessage "WARN" ("Tentativa de empréstimo com código de mídia inexistente: " ++ show codigo)
       putStrLn "ERRO: Mídia não encontrada."
-      return Nothing
+      return (Nothing, fila)
 
 
 devolverMidia :: [Emprestimo] -> Matricula -> Codigo -> IO (Maybe [Emprestimo])
@@ -74,3 +81,39 @@ devolverMidia emprestimos matStr codigo = do
       logMessage "WARN" ("Tentativa de devolução de uma mídia não emprestada: " ++ matStr ++ ", " ++ show codigo)
       putStrLn "ERRO: Empréstimo não encontrado para este usuário e mídia."
       return Nothing
+      
+
+adicionarNaEspera :: Usuario -> Midia -> [ListaEspera] -> [ListaEspera]
+adicionarNaEspera usuario midia fila =
+  case find (\f -> cod (itemEmEspera f) == cod midia) fila of
+    Just filaExistente ->
+      map (\f -> if cod (itemEmEspera f) == cod midia
+                 then f { usuariosNaFila = usuariosNaFila f ++ [usuario] }
+                 else f) fila
+    Nothing ->
+      ListaEspera midia [usuario] : fila
+
+removerDaEspera :: Midia -> [ListaEspera] -> (Maybe Usuario, [ListaEspera])
+removerDaEspera midia filas =
+  case find (\f -> cod (itemEmEspera f) == cod midia) filas of
+    Just fila ->
+      case usuariosNaFila fila of
+        []     -> (Nothing, filas)
+        (x:xs) ->
+          let novasFilas = map (\f -> if cod (itemEmEspera f) == cod midia
+                                      then f { usuariosNaFila = xs }
+                                      else f) filas
+          in (Just x, novasFilas)
+    Nothing -> (Nothing, filas)
+
+consultarEspera :: Midia -> [ListaEspera] -> [Usuario]
+consultarEspera midia filas =
+  case find (\f -> cod (itemEmEspera f) == cod midia) filas of
+    Just fila -> usuariosNaFila fila
+    Nothing   -> []
+
+proximoDaEspera :: Midia -> [ListaEspera] -> Maybe Usuario
+proximoDaEspera midia filas =
+  case consultarEspera midia filas of
+    []    -> Nothing
+    (x:_) -> Just x

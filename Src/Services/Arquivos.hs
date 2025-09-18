@@ -6,6 +6,7 @@ import Data.List
 import Text.Read (readMaybe)
 --import Data.List.Split (splitOn) -- se der para carregar esse modulo, pode remover 
 import Data.Char (toLower)
+import Data.Maybe (mapMaybe)
 import Control.Monad (forM, when) -- troca o foldr por forM, permitindo executar uma ação de IO (logMessage) para cada linha do arquivo, algo que o foldr (puro) não permite;
 import Data.Maybe (catMaybes) -- filtrar resultados inválidos
 
@@ -179,3 +180,44 @@ salvarEmprestimos caminho emprestimos = do
   
   writeFile caminho conteudoCompleto
   logMessage "INFO" ("Dados de " ++ show (length emprestimos) ++ " empréstimos salvos em '" ++ caminho ++ "'.")
+  
+salvarFilas :: FilePath -> [ListaEspera] -> IO ()
+salvarFilas caminho filas = do
+  let cabecalho = "Codigo,Matricula"
+  let linhas = concatMap formatarFila filas
+  let conteudoCompleto = unlines (cabecalho : linhas)
+  writeFile caminho conteudoCompleto
+  logMessage "INFO" ("Dados de " ++ show (length linhas) ++ " registros de fila de espera salvos em '" ++ caminho ++ "'.")
+
+-- Converte uma ListaEspera em várias linhas
+formatarFila :: ListaEspera -> [String]
+formatarFila fila =
+  let codigo = show (cod (itemEmEspera fila))
+  in map (\u -> intercalate "," [codigo, matricula u]) (usuariosNaFila fila)
+  
+  
+carregarFilas :: FilePath -> [Usuario] -> [Midia] -> IO [ListaEspera]
+carregarFilas caminho usuarios midias = do
+      conteudo <- readFile caminho
+      let linhas = tail (lines conteudo) -- pula cabeçalho
+      let registros = mapMaybe (parseRegistro usuarios midias) linhas
+      -- agrupar por código da mídia
+      let agrupado = groupBy (\x y -> cod (fst x) == cod (fst y)) (sortOn (cod . fst) registros)
+      return $ map juntar agrupado
+  where
+    juntar grupo =
+     let (midias, usuariosFila) = unzip grupo
+     in ListaEspera (head midias) usuariosFila
+
+-- Parsear uma linha simples "Codigo,Matricula"
+parseRegistro :: [Usuario] -> [Midia] -> String -> Maybe (Midia, Usuario)
+parseRegistro usuarios midias linha =
+  case splitPor ',' linha of
+    [codStr, mat] ->
+      case readMaybe codStr of
+        Just codigo -> do
+          midia <- find (\m -> cod m == codigo) midias
+          usuario <- find (\u -> matricula u == mat) usuarios
+          return (midia, usuario)
+        Nothing -> Nothing
+    _ -> Nothing

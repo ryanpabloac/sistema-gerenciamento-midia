@@ -10,7 +10,6 @@ import Entities.SubmenuAdicionarUsuario
 import Entities.SubmenuEditar
 import Entities.Midias
 import Entities.Historico
-import Log.Log
 
 -- | Função principal do programa.
 main :: IO ()
@@ -23,13 +22,14 @@ main = do
   listaDeMidias <- carregarMidias "Src/Services/Arquivos/midias.csv"
   listaDeUsuarios <- carregarUsuarios "Src/Services/Arquivos/usuarios.csv"
   listaDeEmprestimos <- carregarEmprestimos "Src/Services/Arquivos/emprestimos.csv" listaDeUsuarios listaDeMidias
+  filaEspera <- carregarFilas "Src/Services/Arquivos/listaEspera.csv" listaDeUsuarios listaDeMidias 
 
   -- Inicia o loop principal do sistema.
-  mainLoop listaDeMidias listaDeUsuarios listaDeEmprestimos
+  mainLoop listaDeMidias listaDeUsuarios listaDeEmprestimos filaEspera
 
 -- | Loop principal do sistema: exibe o menu e lida com as opções do usuário.
-mainLoop :: [Midia] -> [Usuario] -> [Emprestimo] -> IO ()
-mainLoop midias usuarios emprestimos = do
+mainLoop :: [Midia] -> [Usuario] -> [Emprestimo] -> [ListaEspera] -> IO ()
+mainLoop midias usuarios emprestimos fila = do
   putStrLn "\n========================================"
   putStrLn "  Sistema de Mídias - Menu Principal    "
   putStrLn "========================================"
@@ -49,39 +49,40 @@ mainLoop midias usuarios emprestimos = do
   case opcao of
     "1" -> do
       novasMidias <- loopSubmenuMidias midias
-      mainLoop novasMidias usuarios emprestimos
+      mainLoop novasMidias usuarios emprestimos fila
 
     "2" -> do
       novosUsuarios <- loopSubmenuUsuarios usuarios
-      mainLoop midias novosUsuarios emprestimos
+      mainLoop midias novosUsuarios emprestimos fila
 
     "3" -> do
-      novosEmprestimos <- loopEmprestimoMenu emprestimos midias usuarios
-      mainLoop midias usuarios novosEmprestimos
+      (novosEmprestimos, novaFila) <- loopEmprestimoMenu emprestimos midias usuarios fila
+      mainLoop midias usuarios novosEmprestimos novaFila
 
     "4" -> do
       buscarMidias_IO midias
-      mainLoop midias usuarios emprestimos
+      mainLoop midias usuarios emprestimos fila
 
     "5" -> do
-      relatorio emprestimos []
-      mainLoop midias usuarios emprestimos
+      relatorio emprestimos fila
+      mainLoop midias usuarios emprestimos fila
 
     "6" -> do
       (novasMidias, novosUsuarios) <- loopSubmenuEditar midias usuarios
-      mainLoop novasMidias novosUsuarios emprestimos
+      mainLoop novasMidias novosUsuarios emprestimos fila
 
     "7" -> do
       mostrarHistorico
-      mainLoop midias usuarios emprestimos
+      mainLoop midias usuarios emprestimos fila
 
     "0" -> do
       putStrLn "\nSalvando alterações..."
       salvarMidias "Src/Services/Arquivos/midias.csv" midias
       salvarUsuarios "Src/Services/Arquivos/usuarios.csv" usuarios
+      salvarFilas "Src/Services/Arquivos/listaEspera.csv" fila
       putStrLn "Dados salvos com sucesso. Até a próxima!"
       return ()
 
     _ -> do
       putStrLn "\nOpção inválida! Por favor, digite um número válido."
-      mainLoop midias usuarios emprestimos
+      mainLoop midias usuarios emprestimos fila
