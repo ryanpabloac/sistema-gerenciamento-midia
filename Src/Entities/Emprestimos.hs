@@ -1,7 +1,8 @@
 module Entities.Emprestimos where
 
-import Data.List (sortOn, groupBy)
+import Data.List
 import Data.Function (on)
+import Entities.Tipos
 
 tipoMidia :: Emprestimo -> TipoMidia
 tipoMidia emp =
@@ -58,10 +59,10 @@ frequenciaEmprestimos emprestimos = do
   let agrupamentodatas = group . sort $ map dataEmprestimo emprestimos
   mapM_ imprimirfrequencia agrupamentodatas
   where 
-    imprimirfrequencia grupo = do
-    let dataEmp    = head grupo
-    let quantidade =  length grupo
-    putStrLn $ "| Data: " ++ show dataEmp ++ ": " ++ show quantidade ++ " empréstimos"
+     imprimirfrequencia grupo = do 
+       let dataEmp    = head grupo
+       let quantidade = length grupo
+       putStrLn $ "| Data: " ++ show dataEmp ++ ": " ++ show quantidade ++ " empréstimos"
 
 itensComListaEspera :: [ListaEspera] -> IO ()
 itensComListaEspera xs = do
@@ -81,7 +82,7 @@ relatorioOperacoes emprestimos = do
   putStrLn "Digite o nome do usuário ou o tipo de mídia (Livro, Filme, Jogo):"
   putStr "Critério de busca: "
   criterio <- getLine
-  putStrln $ "\nResultados para: \"" ++ criterio ++ "\""
+  putStrLn $ "\nResultados para: \"" ++ criterio ++ "\""
   let resultados = filter (filtraPorCriterio criterio) emprestimos
   if null resultados
     then putStrLn "Nenhuma operação encontrada para este critério."

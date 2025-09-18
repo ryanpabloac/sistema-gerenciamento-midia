@@ -4,7 +4,6 @@ import Entities.Tipos
 import Log.Log
 import Data.List
 import Text.Read (readMaybe)
-import Data.Time.Calendar (Day)
 --import Data.List.Split (splitOn) -- se der para carregar esse modulo, pode remover 
 import Data.Char (toLower)
 import Control.Monad (forM, when) -- troca o foldr por forM, permitindo executar uma ação de IO (logMessage) para cada linha do arquivo, algo que o foldr (puro) não permite;
@@ -60,15 +59,15 @@ carregarUsuarios caminho = do
 parseMidia :: String -> Either String Midia
 parseMidia linha =
   case splitPor ',' linha of
-    [codStr, tipo, titulo, anoStr, criador] ->
+    [codStr, tipo, tituloMidia, anoStr, criadorMidia] ->
       case (readMaybe codStr, readMaybe anoStr) of
-        (Just cod, Just ano) ->
-          let criacao = case map toLower tipo of
-                          "\"livro\"" -> AutorLivro criador
-                          "\"filme\"" -> AutorFilme criador
-                          "\"jogo\""  -> AutorJogo criador
+        (Just codigoMidia, Just anoCriacao) ->
+          let criação = case map toLower tipo of
+                          "\"livro\"" -> AutorLivro criadorMidia
+                          "\"filme\"" -> AutorFilme criadorMidia
+                          "\"jogo\""  -> AutorJogo criadorMidia
                           _           -> AutorLivro "INDEFINIDO"
-          in Right $ Midia cod titulo ano criacao
+          in Right $ Midia codigoMidia tituloMidia anoCriacao criação
         _ -> Left $ "Erro de conversão de número na linha: " ++ linha
     _ -> Left $ "Linha de mídia mal formatada: " ++ linha
 
@@ -140,33 +139,30 @@ salvarMidias caminho midias = do
   logMessage "INFO" ("Dados de " ++ show (length midias) ++ " mídias salvas em '" ++ caminho ++ "'.")
 
 parseEmprestimo :: [Usuario] -> [Midia] -> String -> Maybe Emprestimo
-parseEmprestimo usuarios midias linha =
-  case splitPor ',' linha of
-    [matStr, codStr, dataStr] -> do
-      let codigo = readMaybe codStr :: Maybe Codigo
-      let dEmprestimo = readMaybe dataStr :: Maybe Day
-      usuario <- find (\u -> matricula u == matStr) usuarios
-      midia <- find (\m -> cod m == read codStr) midias
-      cod <- codigo
-      dataEmprestimo <- dEmprestimo
-      return $ Emprestimo usuario midia dataEmprestimo
-    _ -> Nothing
+parseEmprestimo usuarios midias linha = do
+  [matStr, codStr, dataStr] <- Just (splitPor ',' linha)
+  codigo <- readMaybe codStr
+  dataEmp <- readMaybe dataStr
+
+  usuario <- find (\u -> matricula u == matStr) usuarios
+  midia <- find (\m -> cod m == codigo) midias
+
+  return $ Emprestimo usuario midia dataEmp
  
  
 carregarEmprestimos :: FilePath -> [Usuario] -> [Midia] -> IO [Emprestimo]
 carregarEmprestimos caminho usuarios midias = do
-  logMessage "INFO" ("Iniciando carregamento do arquivo de empréstimos: '" ++ caminho ++ "'.")
-  conteudo <- readFile caminho
-  let linhas = tail (lines conteudo)
-  let maybeEmprestimos = catMaybes $ map (parseEmprestimo usuarios midias) linhas
-  let numErros = length linhas - length maybeEmprestimos
-  
-  logMessage "INFO" ("Carregamento de '" ++ caminho ++ "' concluído. " ++ show (length maybeEmprestimos) ++ " empréstimos carregados. " ++ show numErros ++ " linhas com erro.")
-
-  when (numErros > 0) $
-    putStrLn $ show numErros ++ " linhas no arquivo de empréstimos não puderam ser lidas e foram ignoradas. Verifique o arquivo de log para detalhes."
+    conteudo <- readFile caminho
+    let linhas = tail (lines conteudo)
+    let maybeEmprestimos = catMaybes $ map (parseEmprestimo usuarios midias) linhas
+    let numErros = length linhas - length maybeEmprestimos
     
-  return maybeEmprestimos
+    logMessage "INFO" ("Carregamento de '" ++ caminho ++ "' concluído. " ++ show (length maybeEmprestimos) ++ " empréstimos carregados. " ++ show numErros ++ " linhas com erro.")
+
+    when (numErros > 0) $
+      putStrLn $ show numErros ++ " linhas no arquivo de empréstimos não puderam ser lidas e foram ignoradas. Verifique o arquivo de log para detalhes."
+    
+    return maybeEmprestimos
  
  
 formatarEmprestimo :: Emprestimo -> String

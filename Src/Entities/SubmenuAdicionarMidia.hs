@@ -2,7 +2,6 @@ module Entities.SubmenuAdicionarMidia where
 
 import Entities.Tipos
 import Entities.Midias
-import System.IO (hSetBuffering, stdout, BufferMode(LineBuffering))
 
 -- função auxiliar para listar as mídias de forma legível;
 listarMidias :: [Midia] -> IO ()

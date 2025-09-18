@@ -2,9 +2,7 @@ module Services.Movimentacoes where
 
 import Data.List (find)
 import Data.Time.Clock (getCurrentTime, utctDay)
-import Data.Time.Calendar (Day)
-import Entities.Midias
-import Entities.Usuarios
+import Data.List (findIndex)
 import Entities.Tipos
 import Log.Log
 
@@ -49,4 +47,29 @@ realizarEmprestimo usuarios midias emprestimosAtivos matStr codigo = do
     (_, Nothing) -> do
       logMessage "WARN" ("Tentativa de empréstimo com código de mídia inexistente: " ++ show codigo)
       putStrLn "ERRO: Mídia não encontrada."
+      return Nothing
+
+
+devolverMidia :: [Emprestimo] -> Matricula -> Codigo -> IO (Maybe [Emprestimo])
+devolverMidia emprestimos matStr codigo = do
+  logMessage "INFO" "Iniciando processo de devolução."
+  
+  -- Encontra o empréstimo a ser removido com base na matrícula do usuário e no código da mídia
+  let maybeEmprestimoIndex = findIndex (\e -> matricula (emprestimoUsuario e) == matStr && cod (emprestimoMidia e) == codigo) emprestimos
+  
+  case maybeEmprestimoIndex of
+    Just index -> do
+      let emprestimoRemovido = emprestimos !! index
+      logMessage "INFO" ("Devolução encontrada. Removendo o empréstimo: " ++ show emprestimoRemovido)
+      
+      -- Remove o empréstimo da lista usando a função de filtro
+      let novaListaEmprestimos = filter (\e -> e /= emprestimoRemovido) emprestimos
+      
+      putStrLn "Devolução realizada com sucesso!"
+      putStrLn $ "Mídia: " ++ titulo (emprestimoMidia emprestimoRemovido) ++ " devolvida por " ++ nome (emprestimoUsuario emprestimoRemovido) ++ "."
+      return (Just novaListaEmprestimos)
+    
+    Nothing -> do
+      logMessage "WARN" ("Tentativa de devolução de uma mídia não emprestada: " ++ matStr ++ ", " ++ show codigo)
+      putStrLn "ERRO: Empréstimo não encontrado para este usuário e mídia."
       return Nothing

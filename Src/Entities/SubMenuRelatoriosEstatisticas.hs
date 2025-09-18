@@ -1,11 +1,12 @@
-module Entities.SubmenuRelatorioseestatisticas where
+module Entities.SubmenuRelatoriosEstatisticas where
 
 import Entities.Tipos
 import Entities.Emprestimos
-import System.IO (hSetBuffering, stdout, BufferMode(LineBuffering))
+import Data.List (sortOn, groupBy, sortBy)
+import Data.Function (on)
+import Data.Ord (comparing)
 
-
--- NOTE: Necessidade de passar a lista de emprestimos feita na aba de movimentação;
+-- | Imprime o menu de relatórios.
 relatorio :: [Emprestimo] -> [ListaEspera] -> IO ()
 relatorio listaDeEmprestimos listaDeEspera = do
   putStrLn "\n======================="
@@ -23,29 +24,20 @@ relatorio listaDeEmprestimos listaDeEspera = do
   opcao <- getLine
   loopSubmenuRelatorio listaDeEmprestimos listaDeEspera opcao
 
+-- | O loop principal para o submenu de relatórios.
 loopSubmenuRelatorio :: [Emprestimo] -> [ListaEspera] -> String -> IO ()
-loopSubmenuRelatorio listaDeEmprestimos listaDeEspera opcao = do
+loopSubmenuRelatorio listaDeEmprestimos listaDeEspera opcao =
   case opcao of
-    "1" -> do
-      emprestimosAtivos listaDeEmprestimos
+    "1" -> do emprestimosAtivos listaDeEmprestimos
       relatorio listaDeEmprestimos listaDeEspera
-    "2" -> do
-      usuariosMaisAtivos listaDeEmprestimos
+    "2" -> do usuariosMaisAtivos listaDeEmprestimos
       relatorio listaDeEmprestimos listaDeEspera
-    "3" -> do
-      itensMaisEmprestados listaDeEmprestimos
+    "3" -> do itensMaisEmprestados listaDeEmprestimos
       relatorio listaDeEmprestimos listaDeEspera
-    "4" -> do
-      frequenciaEmprestimos listaDeEmprestimos
+    "4" -> do frequenciaEmprestimos listaDeEmprestimos
       relatorio listaDeEmprestimos listaDeEspera
-    "5" -> do
-      itensComListaEspera listaDeEspera
+    "5" -> do itensComListaEspera listaDeEspera
       relatorio listaDeEmprestimos listaDeEspera
-    "6" -> do
-      relatorioOperacoes listaDeEmprestimos
+    "6" -> do relatorioOperacoes listaDeEmprestimos
       relatorio listaDeEmprestimos listaDeEspera
-    "7" -> do
-      putStrLn "Voltando ao menu principal."
-     _ -> do
-      putStrLn "Opção inválida. Tente novamente."
-      relatorio listaDeEmprestimos listaDeEspera
+

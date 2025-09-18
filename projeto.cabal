@@ -1,7 +1,7 @@
 cabal-version:    3.0
 
 name:             sistema-gerenciamento-midia
-version:          0.0.0.1
+version:          0.0.1.1
 synopsis:         Sistema de gerenciamento de mídias
 description:      Sistema de gerenciamento de mídias(livros,filmes,jogos)
 author:           grupo
@@ -21,18 +21,24 @@ executable sistema
     main-is:         Main.hs
     hs-source-dirs:  App, Src
     other-modules:
-        Entities.Midias 
+        Entities.Midias
+        Entities.Emprestimos
         Entities.SubmenuAdicionarMidia 
         Entities.SubmenuAdicionarUsuario 
+        Entities.SubmenuRelatoriosEstatisticas 
         Entities.SubmenuEditar 
         Entities.Tipos 
         Entities.Usuarios 
         Services.Arquivos 
         Services.Movimentacoes 
+        Services.SubmenuMovimentacoes 
         Log.Log 
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
 
-    build-depends:    base ^>=4.18.3.0, time
+    build-depends:
+       base ^>=4.18.3.0,
+       time,
+       sort
     default-language: Haskell2010

@@ -1,7 +1,7 @@
 module Entities.Midias where
 import Entities.Tipos
 import Log.Log
-import Data.Time.Calendar (Day, fromGregorian, toGregorian)
+import Data.Time.Calendar (toGregorian)
 import Data.Time.Clock (utctDay, getCurrentTime)
 import Data.List
 import Data.Char
@@ -180,18 +180,18 @@ lerTipoMidia = do
     "livro" -> do
       logMessage "DEBUG" "Usuário selecionou o tipo 'Livro'."
       putStr "Autor: "
-      nome <- getLine
-      return (AutorLivro nome)
+      n <- getLine
+      return (AutorLivro n)
     "filme" -> do
       logMessage "DEBUG" "Usuário selecionou o tipo 'Filme'."
       putStr "Diretor: "
-      nome <- getLine
-      return (AutorFilme nome)
+      n <- getLine
+      return (AutorFilme n)
     "jogo" -> do
       logMessage "DEBUG" "Usuário selecionou o tipo 'Jogo'."
       putStr "Criador/Estúdio: "
-      nome <- getLine
-      return (AutorJogo nome)
+      n <- getLine
+      return (AutorJogo n)
     _ -> do
       logMessage "WARN" ("Usuário inseriu um tipo de mídia inválido: '" ++ tipoStr ++ "'.") -- log
       putStrLn "Opção inválida. Tente novamente."

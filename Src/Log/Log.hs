@@ -1,7 +1,6 @@
 module Log.Log where
 
 import Data.Time (getCurrentTime, formatTime, defaultTimeLocale)
-import System.IO (appendFile)
 
 -- O nome do nosso arquivo de log
 logFile :: FilePath
@@ -18,3 +17,12 @@ logMessage nivel msg = do
   let logLine = formattedTime ++ " [" ++ nivel ++ "] " ++ msg ++ "\n" -- '\n' para pular a linha
   -- adiciona a linha no final do arquivo de log, por isso o appendFile;
   appendFile logFile logLine
+  
+imprimirLog :: IO ()
+imprimirLog = do
+  putStrLn "\n==================="
+  putStrLn "CONTEÚDO DO LOG"
+  putStrLn "==================="
+  conteudo <- readFile "system.log"
+  putStrLn conteudo
+  putStrLn "==================="

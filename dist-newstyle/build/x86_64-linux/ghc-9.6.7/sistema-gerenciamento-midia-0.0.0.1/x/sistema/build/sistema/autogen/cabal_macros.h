@@ -20,6 +20,16 @@
   (major1) == 4 && (major2) <  18 || \
   (major1) == 4 && (major2) == 18 && (minor) <= 3)
 #endif /* MIN_VERSION_base */
+/* package sort-1.0.0.0 */
+#ifndef VERSION_sort
+#define VERSION_sort "1.0.0.0"
+#endif /* VERSION_sort */
+#ifndef MIN_VERSION_sort
+#define MIN_VERSION_sort(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  0 || \
+  (major1) == 1 && (major2) == 0 && (minor) <= 0)
+#endif /* MIN_VERSION_sort */
 /* package time-1.12.2 */
 #ifndef VERSION_time
 #define VERSION_time "1.12.2"

@@ -27,7 +27,7 @@ data Usuario = Usuario
 
 -- Para classificar a mídia
 data TipoMidia = TipoLivro | TipoFilme | TipoJogo
-  deriving (Show, Eq)
+  deriving (Show, Eq, Ord)
 
 -- Estrutura para guardar os criadores, ja que sao todos do mesmo tipo
 data AutorMidia = AutorLivro { autor :: Autor } | AutorFilme { diretor :: Diretor } | AutorJogo  { criador :: Criador }
