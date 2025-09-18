@@ -39,7 +39,8 @@ mainLoop midias usuarios emprestimos fila = do
   putStrLn "4 - Busca e Listagem Avançada"
   putStrLn "5 - Relatórios e Estatísticas"
   putStrLn "6 - Edição de Dados"
-  putStrLn "7 - Auditoria e Histórico"
+  putStrLn "7 - Histórico"
+  putStrLn "8 - Auditoria"
   putStrLn "0 - Salvar e Sair"
   putStrLn "----------------------------------------"
   putStr "Digite uma opção: "
@@ -75,6 +76,9 @@ mainLoop midias usuarios emprestimos fila = do
       mostrarHistorico
       mainLoop midias usuarios emprestimos fila
 
+    "8" -> do
+       imprimirLog
+       mainLoop midias usuarios emprestimos fila
     "0" -> do
       putStrLn "\nSalvando alterações..."
       salvarMidias "Src/Services/Arquivos/midias.csv" midias
