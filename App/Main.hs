@@ -8,6 +8,7 @@ import Entities.SubmenuRelatoriosEstatisticas
 import Entities.SubmenuAdicionarMidia
 import Entities.SubmenuAdicionarUsuario
 import Entities.SubmenuEditar
+import Entities.Midias
 import Log.Log
 
 -- | Função principal do programa.
@@ -58,8 +59,7 @@ mainLoop midias usuarios emprestimos = do
       mainLoop midias usuarios novosEmprestimos
 
     "4" -> do
-      putStrLn "\n[DEBUG] Acesso a Busca e Listagem Avançada..."
-      -- Aqui você chamaria a função para o submenu de Busca.
+      buscarMidias_IO midias
       mainLoop midias usuarios emprestimos
 
     "5" -> do
