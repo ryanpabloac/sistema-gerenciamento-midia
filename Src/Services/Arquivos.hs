@@ -62,12 +62,12 @@ parseMidia linha =
     [codStr, tipo, tituloMidia, anoStr, criadorMidia] ->
       case (readMaybe codStr, readMaybe anoStr) of
         (Just codigoMidia, Just anoCriacao) ->
-          let criação = case map toLower tipo of
-                          "\"livro\"" -> AutorLivro criadorMidia
-                          "\"filme\"" -> AutorFilme criadorMidia
-                          "\"jogo\""  -> AutorJogo criadorMidia
-                          _           -> AutorLivro "INDEFINIDO"
-          in Right $ Midia codigoMidia tituloMidia anoCriacao criação
+          let criacao = case map toLower tipo of
+                          "livro" -> AutorLivro criadorMidia
+                          "filme" -> AutorFilme criadorMidia
+                          "jogo"  -> AutorJogo criadorMidia
+                          _       -> AutorLivro "INDEFINIDO"
+          in Right $ Midia codigoMidia tituloMidia anoCriacao criacao
         _ -> Left $ "Erro de conversão de número na linha: " ++ linha
     _ -> Left $ "Linha de mídia mal formatada: " ++ linha
 

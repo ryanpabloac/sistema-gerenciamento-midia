@@ -189,3 +189,46 @@
 2025-09-18 12:40:00 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
 2025-09-18 12:40:00 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
 2025-09-18 12:40:00 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 16:02:54 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 16:02:54 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 16:02:54 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 16:02:54 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 16:02:54 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 16:02:54 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
+2025-09-18 16:02:54 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 16:38:43 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 16:38:43 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 16:38:43 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 16:38:43 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 16:38:43 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 16:38:43 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
+2025-09-18 16:38:43 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 16:38:48 [INFO] Sessão de busca avançada de mídia iniciada.
+2025-09-18 16:39:19 [INFO] Sessão de busca avançada de mídia iniciada.
+2025-09-18 16:39:56 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 16:39:56 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 16:39:56 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 16:39:56 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 16:39:56 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 16:39:56 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
+2025-09-18 16:39:56 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 16:39:58 [INFO] Sessão de busca avançada de mídia iniciada.
+2025-09-18 16:40:08 [INFO] Busca realizada com os critérios: [CriadorContem "Agatha"]
+2025-09-18 16:43:59 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 16:43:59 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 16:43:59 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 16:43:59 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 16:43:59 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 16:43:59 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
+2025-09-18 16:43:59 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 16:44:03 [INFO] Sessão de busca avançada de mídia iniciada.
+2025-09-18 16:44:14 [INFO] Busca realizada com os critérios: [CriadorContem "Agatha"]
+2025-09-18 16:48:15 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 16:48:15 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 16:48:15 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 16:48:15 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 16:48:15 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 16:48:15 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
+2025-09-18 16:48:15 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 16:48:18 [INFO] Sessão de busca avançada de mídia iniciada.
+2025-09-18 16:48:27 [INFO] Busca realizada com os critérios: [CriadorContem "Agatha"]
