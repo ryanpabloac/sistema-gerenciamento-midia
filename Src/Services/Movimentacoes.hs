@@ -5,6 +5,7 @@ import Data.Time.Clock (getCurrentTime, utctDay)
 import Data.List (findIndex)
 import Entities.Tipos
 import Log.Log
+import Entities.Historico (registrarOperacao)
 
 realizarEmprestimo :: [Usuario] -> [Midia] -> [Emprestimo] -> Matricula -> Codigo -> IO (Maybe Emprestimo)
 realizarEmprestimo usuarios midias emprestimosAtivos matStr codigo = do
@@ -33,7 +34,7 @@ realizarEmprestimo usuarios midias emprestimosAtivos matStr codigo = do
                 , emprestimoMidia = midia
                 , dataEmprestimo = dataAtual
                 }
-
+          registrarOperacao "EMPRÉSTIMO" usuario midia
           logMessage "INFO" ("Novo empréstimo criado: " ++ show novoEmprestimo)
           putStrLn "Empréstimo realizado com sucesso!"
           putStrLn $ "Mídia: " ++ titulo midia ++ " emprestada para " ++ nome usuario ++ "."
@@ -64,7 +65,7 @@ devolverMidia emprestimos matStr codigo = do
       
       -- Remove o empréstimo da lista usando a função de filtro
       let novaListaEmprestimos = filter (\e -> e /= emprestimoRemovido) emprestimos
-      
+      registrarOperacao "DEVOLUÇÃO" (emprestimoUsuario emprestimoRemovido) (emprestimoMidia emprestimoRemovido)      
       putStrLn "Devolução realizada com sucesso!"
       putStrLn $ "Mídia: " ++ titulo (emprestimoMidia emprestimoRemovido) ++ " devolvida por " ++ nome (emprestimoUsuario emprestimoRemovido) ++ "."
       return (Just novaListaEmprestimos)

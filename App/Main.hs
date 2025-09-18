@@ -9,6 +9,7 @@ import Entities.SubmenuAdicionarMidia
 import Entities.SubmenuAdicionarUsuario
 import Entities.SubmenuEditar
 import Entities.Midias
+import Entities.Historico
 import Log.Log
 
 -- | Função principal do programa.
@@ -71,7 +72,7 @@ mainLoop midias usuarios emprestimos = do
       mainLoop novasMidias novosUsuarios emprestimos
 
     "7" -> do
-      imprimirLog
+      mostrarHistorico
       mainLoop midias usuarios emprestimos
 
     "0" -> do

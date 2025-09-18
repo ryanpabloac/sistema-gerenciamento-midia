@@ -40,5 +40,6 @@ executable sistema
     build-depends:
        base >=4.18 && <4.22,
        time,
-       sort
+       sort,
+       directory
     default-language: Haskell2010
