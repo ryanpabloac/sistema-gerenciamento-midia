@@ -4,9 +4,11 @@ import Entities.Tipos
 import System.IO
 import Services.Arquivos
 import Services.SubmenuMovimentacoes
+import Entities.SubmenuRelatoriosEstatisticas
 import Entities.SubmenuAdicionarMidia
 import Entities.SubmenuAdicionarUsuario
 import Entities.SubmenuEditar
+import Log.Log
 
 -- | Função principal do programa.
 main :: IO ()
@@ -62,8 +64,7 @@ mainLoop midias usuarios emprestimos = do
       mainLoop midias usuarios emprestimos
 
     "5" -> do
-      putStrLn "\n[DEBUG] Acesso a Relatórios e Estatísticas..."
-      -- Aqui você chamaria a função para o submenu de Relatórios.
+      relatorio emprestimos []
       mainLoop midias usuarios emprestimos
 
     "6" -> do
@@ -76,8 +77,7 @@ mainLoop midias usuarios emprestimos = do
       mainLoop midias usuarios emprestimos
 
     "8" -> do
-      putStrLn "\n[DEBUG] Acesso a Auditoria e Histórico..."
-      -- Aqui você chamaria a função para o submenu de Auditoria.
+      imprimirLog
       mainLoop midias usuarios emprestimos
 
     "0" -> do
