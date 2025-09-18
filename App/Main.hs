@@ -37,8 +37,7 @@ mainLoop midias usuarios emprestimos = do
   putStrLn "4 - Busca e Listagem Avançada"
   putStrLn "5 - Relatórios e Estatísticas"
   putStrLn "6 - Edição de Dados"
-  putStrLn "7 - Exportação/Importação de Dados"
-  putStrLn "8 - Auditoria e Histórico"
+  putStrLn "7 - Auditoria e Histórico"
   putStrLn "0 - Salvar e Sair"
   putStrLn "----------------------------------------"
   putStr "Digite uma opção: "
@@ -72,11 +71,6 @@ mainLoop midias usuarios emprestimos = do
       mainLoop novasMidias novosUsuarios emprestimos
 
     "7" -> do
-      putStrLn "\n[DEBUG] Acesso a Exportação/Importação..."
-      -- Aqui você chamaria a função para o submenu de Exportação.
-      mainLoop midias usuarios emprestimos
-
-    "8" -> do
       imprimirLog
       mainLoop midias usuarios emprestimos
 
