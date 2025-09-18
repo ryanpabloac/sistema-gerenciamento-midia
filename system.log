@@ -166,3 +166,19 @@
 2025-09-18 12:20:01 [INFO] Dados de 21 mídias salvas em 'Src/Services/Arquivos/midias.csv'.
 2025-09-18 12:20:01 [INFO] Dados de 7 usuários salvos em 'Src/Services/Arquivos/usuarios.csv'.
 2025-09-18 12:20:01 [INFO] Dados de 0 empréstimos salvos em 'Src/Services/Arquivos/emprestimos.csv'.
+2025-09-18 12:23:54 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/Midia.csv'.
+2025-09-18 12:24:23 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/Midia.csv'.
+2025-09-18 12:28:22 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:28:22 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:28:22 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 12:28:22 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:28:22 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:28:22 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
+2025-09-18 12:28:22 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 12:33:30 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:33:30 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:33:30 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 12:33:30 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:33:30 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:33:30 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
+2025-09-18 12:33:30 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.

@@ -7,8 +7,6 @@ import Services.SubmenuMovimentacoes
 import Entities.SubmenuAdicionarMidia
 import Entities.SubmenuAdicionarUsuario
 import Entities.SubmenuEditar
-import Entities.SubmenuRelatoriosEstatisticas
-import Log.Log
 
 -- | Função principal do programa.
 main :: IO ()
@@ -21,6 +19,7 @@ main = do
   listaDeMidias <- carregarMidias "Src/Services/Arquivos/midias.csv"
   listaDeUsuarios <- carregarUsuarios "Src/Services/Arquivos/usuarios.csv"
   listaDeEmprestimos <- carregarEmprestimos "Src/Services/Arquivos/emprestimos.csv" listaDeUsuarios listaDeMidias
+
   -- Inicia o loop principal do sistema.
   mainLoop listaDeMidias listaDeUsuarios listaDeEmprestimos
 
@@ -33,20 +32,22 @@ mainLoop midias usuarios emprestimos = do
   putStrLn "1 - Cadastro de Itens"
   putStrLn "2 - Cadastro de Usuários"
   putStrLn "3 - Empréstimos e Devoluções"
-  putStrLn "4 - Relatórios e Estatísticas"
-  putStrLn "5 - Edição de Dados"
-  putStrLn "6 - Auditoria e Histórico"
+  putStrLn "4 - Busca e Listagem Avançada"
+  putStrLn "5 - Relatórios e Estatísticas"
+  putStrLn "6 - Edição de Dados"
+  putStrLn "7 - Exportação/Importação de Dados"
+  putStrLn "8 - Auditoria e Histórico"
   putStrLn "0 - Salvar e Sair"
   putStrLn "----------------------------------------"
   putStr "Digite uma opção: "
-  
-  opcao <- getLine
 
+  opcao <- getLine
+  
   case opcao of
     "1" -> do
       novasMidias <- loopSubmenuMidias midias
       mainLoop novasMidias usuarios emprestimos
-    
+
     "2" -> do
       novosUsuarios <- loopSubmenuUsuarios usuarios
       mainLoop midias novosUsuarios emprestimos
@@ -54,24 +55,35 @@ mainLoop midias usuarios emprestimos = do
     "3" -> do
       novosEmprestimos <- loopEmprestimoMenu emprestimos midias usuarios
       mainLoop midias usuarios novosEmprestimos
-      
+
     "4" -> do
-      relatorio emprestimos []
+      putStrLn "\n[DEBUG] Acesso a Busca e Listagem Avançada..."
+      -- Aqui você chamaria a função para o submenu de Busca.
       mainLoop midias usuarios emprestimos
 
     "5" -> do
+      putStrLn "\n[DEBUG] Acesso a Relatórios e Estatísticas..."
+      -- Aqui você chamaria a função para o submenu de Relatórios.
+      mainLoop midias usuarios emprestimos
+
+    "6" -> do
       (novasMidias, novosUsuarios) <- loopSubmenuEditar midias usuarios
       mainLoop novasMidias novosUsuarios emprestimos
 
-    "6" -> do
-      imprimirLog
+    "7" -> do
+      putStrLn "\n[DEBUG] Acesso a Exportação/Importação..."
+      -- Aqui você chamaria a função para o submenu de Exportação.
+      mainLoop midias usuarios emprestimos
+
+    "8" -> do
+      putStrLn "\n[DEBUG] Acesso a Auditoria e Histórico..."
+      -- Aqui você chamaria a função para o submenu de Auditoria.
       mainLoop midias usuarios emprestimos
 
     "0" -> do
       putStrLn "\nSalvando alterações..."
       salvarMidias "Src/Services/Arquivos/midias.csv" midias
       salvarUsuarios "Src/Services/Arquivos/usuarios.csv" usuarios
-      salvarEmprestimos "Src/Services/Arquivos/emprestimos.csv" emprestimos
       putStrLn "Dados salvos com sucesso. Até a próxima!"
       return ()
 

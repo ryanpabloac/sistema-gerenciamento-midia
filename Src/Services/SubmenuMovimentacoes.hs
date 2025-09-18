@@ -3,14 +3,6 @@ module Services.SubmenuMovimentacoes where
 import Services.Movimentacoes
 import Entities.Tipos
 
--- Função auxiliar para listar as mídias de forma legível;
-listarMidias :: [Midia] -> IO ()
-listarMidias [] = putStrLn "Nenhuma mídia cadastrada."
-listarMidias midias = do
-  putStrLn "\n--- Lista de Mídias Cadastradas ---"
-  mapM_ print midias
-  putStrLn "------------------------------------"
-
 -- Função auxiliar para listar empréstimos ativos
 listarEmprestimos :: [Emprestimo] -> IO ()
 listarEmprestimos [] = putStrLn "Nenhum empréstimo ativo."

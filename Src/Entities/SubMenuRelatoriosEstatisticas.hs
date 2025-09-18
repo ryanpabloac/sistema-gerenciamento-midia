@@ -40,4 +40,6 @@ loopSubmenuRelatorio listaDeEmprestimos listaDeEspera opcao =
       relatorio listaDeEmprestimos listaDeEspera
     "6" -> do relatorioOperacoes listaDeEmprestimos
       relatorio listaDeEmprestimos listaDeEspera
+    "7" -> do return ()
+    _ -> do relatorio listaDeEmprestimos listaDeEspera
 
