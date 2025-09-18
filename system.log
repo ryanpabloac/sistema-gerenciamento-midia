@@ -118,3 +118,51 @@
 2025-09-18 01:44:31 [DEBUG] 6 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
 2025-09-18 01:44:31 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 6 usuários carregados. 0 linhas com erro.
 2025-09-18 01:44:31 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 12:01:45 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:01:45 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:01:45 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 12:01:45 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:01:45 [DEBUG] 6 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:01:45 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 6 usuários carregados. 0 linhas com erro.
+2025-09-18 12:01:45 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 12:02:53 [INFO] Dados de 21 mídias salvas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:02:53 [INFO] Dados de 6 usuários salvos em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:02:53 [INFO] Dados de 0 empréstimos salvos em 'Src/Services/Arquivos/emprestimos.csv'.
+2025-09-18 12:10:52 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:10:52 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:10:52 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 12:10:52 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:10:52 [DEBUG] 6 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:10:52 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 6 usuários carregados. 0 linhas com erro.
+2025-09-18 12:10:52 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 12:12:57 [INFO] Iniciando processo de empréstimo.
+2025-09-18 12:12:57 [WARN] Tentativa de empréstimo com matrícula inexistente: 12421BCC001
+2025-09-18 12:15:04 [INFO] Sessão de edição de mídia iniciada.
+2025-09-18 12:15:19 [INFO] Mídia com código '104' foi alterada.
+2025-09-18 12:15:25 [INFO] Sessão de edição de usuário iniciada.
+2025-09-18 12:15:30 [WARN] Tentativa de editar usuário com matrícula inexistente: 12421BCC001
+2025-09-18 12:18:12 [INFO] Dados de 21 mídias salvas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:18:12 [INFO] Dados de 6 usuários salvos em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:18:12 [INFO] Dados de 0 empréstimos salvos em 'Src/Services/Arquivos/emprestimos.csv'.
+2025-09-18 12:18:17 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:18:17 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:18:17 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 12:18:17 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:18:17 [DEBUG] 6 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:18:17 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 6 usuários carregados. 0 linhas com erro.
+2025-09-18 12:18:17 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 12:18:26 [INFO] Sessão de cadastro de novo usuário iniciada.
+2025-09-18 12:18:41 [INFO] Novo usuário 'Guilherme' criado com sucesso.
+2025-09-18 12:18:48 [INFO] Dados de 21 mídias salvas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:18:48 [INFO] Dados de 7 usuários salvos em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:18:48 [INFO] Dados de 0 empréstimos salvos em 'Src/Services/Arquivos/emprestimos.csv'.
+2025-09-18 12:19:38 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:19:38 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:19:38 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 12:19:38 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:19:38 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:19:38 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
+2025-09-18 12:19:38 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 12:20:01 [INFO] Dados de 21 mídias salvas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 12:20:01 [INFO] Dados de 7 usuários salvos em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 12:20:01 [INFO] Dados de 0 empréstimos salvos em 'Src/Services/Arquivos/emprestimos.csv'.

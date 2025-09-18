@@ -56,7 +56,7 @@ mainLoop midias usuarios emprestimos = do
       mainLoop midias usuarios novosEmprestimos
       
     "4" -> do
-      relatorio emprestimos _
+      relatorio emprestimos []
       mainLoop midias usuarios emprestimos
 
     "5" -> do

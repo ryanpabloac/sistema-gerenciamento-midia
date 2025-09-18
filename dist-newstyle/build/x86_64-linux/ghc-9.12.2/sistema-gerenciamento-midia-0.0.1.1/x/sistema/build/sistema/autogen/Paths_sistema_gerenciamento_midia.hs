@@ -33,7 +33,7 @@ catchIO :: IO a -> (Exception.IOException -> IO a) -> IO a
 catchIO = Exception.catch
 
 version :: Version
-version = Version [0,0,0,1] []
+version = Version [0,0,1,1] []
 
 getDataFileName :: FilePath -> IO FilePath
 getDataFileName name = do
@@ -46,12 +46,12 @@ getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: 
 
 
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
-bindir     = "/home/spacery/.cabal/bin"
-libdir     = "/home/spacery/.cabal/lib/x86_64-linux-ghc-9.6.7/sistema-gerenciamento-midia-0.0.0.1-inplace-sistema"
-dynlibdir  = "/home/spacery/.cabal/lib/x86_64-linux-ghc-9.6.7"
-datadir    = "/home/spacery/.cabal/share/x86_64-linux-ghc-9.6.7/sistema-gerenciamento-midia-0.0.0.1"
-libexecdir = "/home/spacery/.cabal/libexec/x86_64-linux-ghc-9.6.7/sistema-gerenciamento-midia-0.0.0.1"
-sysconfdir = "/home/spacery/.cabal/etc"
+bindir     = "/home/guilherme-ufu/.cabal/bin"
+libdir     = "/home/guilherme-ufu/.cabal/lib/x86_64-linux-ghc-9.12.2-9b33/sistema-gerenciamento-midia-0.0.1.1-inplace-sistema"
+dynlibdir  = "/home/guilherme-ufu/.cabal/lib/x86_64-linux-ghc-9.12.2-9b33"
+datadir    = "/home/guilherme-ufu/.cabal/share/x86_64-linux-ghc-9.12.2-9b33/sistema-gerenciamento-midia-0.0.1.1"
+libexecdir = "/home/guilherme-ufu/.cabal/libexec/x86_64-linux-ghc-9.12.2-9b33/sistema-gerenciamento-midia-0.0.1.1"
+sysconfdir = "/home/guilherme-ufu/.cabal/etc"
 
 getBinDir     = catchIO (getEnv "sistema_gerenciamento_midia_bindir")     (\_ -> return bindir)
 getLibDir     = catchIO (getEnv "sistema_gerenciamento_midia_libdir")     (\_ -> return libdir)

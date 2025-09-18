@@ -15,7 +15,7 @@ import Prelude
 name :: String
 name = "sistema_gerenciamento_midia"
 version :: Version
-version = Version [0,0,0,1] []
+version = Version [0,0,1,1] []
 
 synopsis :: String
 synopsis = "Sistema de gerenciamento de m\237dias"

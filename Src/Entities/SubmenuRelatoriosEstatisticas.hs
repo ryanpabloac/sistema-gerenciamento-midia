@@ -46,6 +46,6 @@ loopSubmenuRelatorio listaDeEmprestimos listaDeEspera opcao = do
       relatorio listaDeEmprestimos listaDeEspera
     "7" -> do
       putStrLn "Voltando ao menu principal."
-     _ -> do
+    _ -> do
       putStrLn "Opção inválida. Tente novamente."
       relatorio listaDeEmprestimos listaDeEspera
