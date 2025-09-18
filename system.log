@@ -232,3 +232,43 @@
 2025-09-18 16:48:15 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
 2025-09-18 16:48:18 [INFO] Sessão de busca avançada de mídia iniciada.
 2025-09-18 16:48:27 [INFO] Busca realizada com os critérios: [CriadorContem "Agatha"]
+2025-09-18 22:00:44 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 22:00:44 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 22:00:44 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 22:00:44 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 22:00:44 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 22:00:44 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
+2025-09-18 22:00:44 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 22:01:06 [INFO] Iniciando processo de empréstimo.
+2025-09-18 22:01:06 [WARN] Tentativa de empréstimo com matrícula inexistente: 1212
+2025-09-18 22:01:25 [INFO] Sessão de edição de usuário iniciada.
+2025-09-18 22:01:28 [WARN] Tentativa de editar usuário com matrícula inexistente: 1212
+2025-09-18 22:02:51 [INFO] Dados de 21 mídias salvas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 22:02:51 [INFO] Dados de 7 usuários salvos em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 22:04:52 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 22:04:52 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 22:04:52 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 22:04:52 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 22:04:52 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 22:04:52 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
+2025-09-18 22:04:52 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 22:05:03 [INFO] Iniciando processo de empréstimo.
+2025-09-18 22:05:03 [WARN] Tentativa de empréstimo com código de mídia inexistente: 1010
+2025-09-18 22:05:15 [INFO] Iniciando processo de empréstimo.
+2025-09-18 22:05:15 [WARN] Tentativa de empréstimo com código de mídia inexistente: 100
+2025-09-18 22:05:22 [INFO] Dados de 21 mídias salvas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 22:05:22 [INFO] Dados de 7 usuários salvos em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 22:05:58 [INFO] Iniciando carregamento do arquivo de mídias: 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 22:05:58 [DEBUG] 21 linhas de dados encontradas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 22:05:58 [INFO] Carregamento de 'Src/Services/Arquivos/midias.csv' concluído. 21 mídias carregadas. 0 linhas com erro.
+2025-09-18 22:05:58 [INFO] Iniciando carregamento do arquivo de usuários: 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 22:05:58 [DEBUG] 7 linhas de dados encontradas em 'Src/Services/Arquivos/usuarios.csv'.
+2025-09-18 22:05:58 [INFO] Carregamento de 'Src/Services/Arquivos/usuarios.csv' concluído. 7 usuários carregados. 0 linhas com erro.
+2025-09-18 22:05:58 [INFO] Carregamento de 'Src/Services/Arquivos/emprestimos.csv' concluído. 0 empréstimos carregados. 0 linhas com erro.
+2025-09-18 22:06:09 [INFO] Iniciando processo de empréstimo.
+2025-09-18 22:06:09 [INFO] Usuário e mídia encontrados. Verificando disponibilidade da mídia: E Não Sobrou Nenhum
+2025-09-18 22:06:09 [INFO] Novo empréstimo criado: Emprestimo {emprestimoUsuario = Usuario {nome = "Ryan Costa", matricula = "12421", email = "ryan@mail.com"}, emprestimoMidia = Midia {cod = 1212, titulo = "E N\227o Sobrou Nenhum", ano = 1939, criacao = AutorLivro {autor = "Agatha"}}, dataEmprestimo = 2025-09-18}
+2025-09-18 22:06:32 [INFO] Iniciando processo de devolução.
+2025-09-18 22:06:32 [INFO] Devolução encontrada. Removendo o empréstimo: Emprestimo {emprestimoUsuario = Usuario {nome = "Ryan Costa", matricula = "12421", email = "ryan@mail.com"}, emprestimoMidia = Midia {cod = 1212, titulo = "E N\227o Sobrou Nenhum", ano = 1939, criacao = AutorLivro {autor = "Agatha"}}, dataEmprestimo = 2025-09-18}
+2025-09-18 22:07:29 [INFO] Dados de 21 mídias salvas em 'Src/Services/Arquivos/midias.csv'.
+2025-09-18 22:07:29 [INFO] Dados de 7 usuários salvos em 'Src/Services/Arquivos/usuarios.csv'.

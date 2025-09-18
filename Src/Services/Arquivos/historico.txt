@@ -1,0 +1,2 @@
+18/09/2025 22:06:09 - [EMPRÉSTIMO] Usuario: Ryan Costa (Matrícula: 12421) | Midia: "E Não Sobrou Nenhum" (Código: 1212)
+18/09/2025 22:06:32 - [DEVOLUÇÃO] Usuario: Ryan Costa (Matrícula: 12421) | Midia: "E Não Sobrou Nenhum" (Código: 1212)
